@@ -36,4 +36,8 @@ public enum Menu {
     private boolean hasSameName(final String menuName) {
         return name.equals(menuName);
     }
+
+    public int price() {
+        return price;
+    }
 }

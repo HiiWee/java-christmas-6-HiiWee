@@ -1,5 +1,7 @@
 package christmas.domain.menu;
 
+import christmas.validator.domain.exception.DomainExceptionMessage;
+import java.util.Arrays;
 import java.util.List;
 
 public enum MenuType {
@@ -13,5 +15,23 @@ public enum MenuType {
 
     MenuType(final List<Menu> menus) {
         this.menus = menus;
+    }
+
+    public static MenuType getType(final Menu menu) {
+        return Arrays.stream(values())
+                .filter(menuType -> menuType.contains(menu))
+                .findAny()
+                .orElseThrow(DomainExceptionMessage.NOT_FOUND_MENU_TYPE::create);
+    }
+
+    public static boolean isNotOnlyBeverage(final List<MenuType> menuTypes) {
+        if (menuTypes.size() == 1) {
+            return !menuTypes.contains(BEVERAGE);
+        }
+        return true;
+    }
+
+    private boolean contains(final Menu menu) {
+        return menus.contains(menu);
     }
 }
