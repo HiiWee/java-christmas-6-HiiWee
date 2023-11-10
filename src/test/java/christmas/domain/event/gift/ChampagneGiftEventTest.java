@@ -17,7 +17,7 @@ class ChampagneGiftEventTest {
     @Test
     void participateEvent() {
         // given
-        Reservation reservation = Reservation.createFrom(List.of("티본스테이크-3"), 29);
+        Reservation reservation = Reservation.createFrom(List.of("티본스테이크-3"), "29");
 
         // when
         EventParticipationHistory history = new EventParticipationHistory(new EnumMap<>(EventType.class));

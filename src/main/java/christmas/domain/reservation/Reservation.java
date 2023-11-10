@@ -9,7 +9,7 @@ import java.util.List;
 
 public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate) {
 
-    public static Reservation createFrom(final List<String> inputMenus, final int date) {
+    public static Reservation createFrom(final List<String> inputMenus, final String date) {
         return new Reservation(
                 SelectedMenus.createFrom(inputMenus),
                 SelectedDate.createFrom(date)
