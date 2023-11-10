@@ -1,6 +1,10 @@
 package christmas.domain.menu;
 
+import christmas.validator.domain.exception.DomainExceptionMessage;
+import java.util.Arrays;
+
 public enum Menu {
+
     MUSHROOM_SOUP("양송이수프", 6_000),
     TAPAS("타파스", 5_500),
     CAESAR_SALAD("시저샐러드", 8_000),
@@ -20,5 +24,16 @@ public enum Menu {
     Menu(final String name, final int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public static Menu find(final String menuName) {
+        return Arrays.stream(values())
+                .filter(menu -> menu.hasSameName(menuName))
+                .findAny()
+                .orElseThrow(DomainExceptionMessage.INVALID_ORDER::create);
+    }
+
+    private boolean hasSameName(final String menuName) {
+        return name.equals(menuName);
     }
 }

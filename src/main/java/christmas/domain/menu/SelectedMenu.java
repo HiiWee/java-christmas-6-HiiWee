@@ -1,0 +1,16 @@
+package christmas.domain.menu;
+
+import christmas.validator.domain.exception.DomainExceptionMessage;
+
+public record SelectedMenu(Menu menu, int count) {
+
+    private static final int MINIMUM_ORDER_COUNT = 1;
+
+    public static SelectedMenu createFrom(final String menuName, final int count) {
+        Menu menu = Menu.find(menuName);
+        if (count < MINIMUM_ORDER_COUNT) {
+            throw DomainExceptionMessage.INVALID_ORDER.create();
+        }
+        return new SelectedMenu(menu, count);
+    }
+}
