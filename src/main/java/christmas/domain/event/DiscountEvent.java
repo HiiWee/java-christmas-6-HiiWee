@@ -5,7 +5,7 @@ import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
 import java.util.List;
 
-public interface Event {
+public interface DiscountEvent {
 
     static boolean canJoinAnyEvent(final SelectedMenus selectedMenus) {
         List<MenuType> menuTypes = selectedMenus.extractMenuTypes();

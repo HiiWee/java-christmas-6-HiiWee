@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class ChristmasEventTest {
+class ChristmasDiscountEventTest {
 
     @DisplayName("크리스마스 이벤트에 참여하여 할인을 받을 수 있다.")
     @ParameterizedTest
@@ -24,8 +24,8 @@ class ChristmasEventTest {
         Reservation reservation = Reservation.createFrom(List.of("양송이수프-1", "타파스-2"), date);
 
         // when
-        Event event = new ChristmasEvent();
-        int discountPrice = event.calculateDiscountPrice(reservation);
+        DiscountEvent discountEvent = new ChristmasDiscountEvent();
+        int discountPrice = discountEvent.calculateDiscountPrice(reservation);
 
         // then
         assertThat(discountPrice).isEqualTo(expectedDiscountPrice);

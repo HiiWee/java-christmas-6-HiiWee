@@ -3,7 +3,7 @@ package christmas.domain.event;
 import christmas.domain.date.SelectedDate;
 import christmas.domain.reservation.Reservation;
 
-public class ChristmasEvent implements Event {
+public class ChristmasDiscountEvent implements DiscountEvent {
 
     // TODO 크리스마스 조건 분리
     private static final EventType CHRISTMAS_EVENT = EventType.CHRISTMAS_EVENT;

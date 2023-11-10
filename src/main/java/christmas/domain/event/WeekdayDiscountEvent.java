@@ -3,7 +3,7 @@ package christmas.domain.event;
 import christmas.domain.menu.MenuType;
 import christmas.domain.reservation.Reservation;
 
-public class WeekdayEvent implements Event {
+public class WeekdayDiscountEvent implements DiscountEvent {
 
     private static final EventType WEEKDAY_EVENT = EventType.WEEKDAY_EVENT;
     private static final MenuType TARGET_MENU_TYPE = MenuType.DESSERT;

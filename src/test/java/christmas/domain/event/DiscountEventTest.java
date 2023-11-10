@@ -1,14 +1,12 @@
 package christmas.domain.event;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import christmas.domain.menu.SelectedMenus;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class EventTest {
+class DiscountEventTest {
 
     @DisplayName("10_000원 이하의 금액일 경우 이벤트를 참여할 수 없다.")
     @Test
@@ -17,7 +15,7 @@ class EventTest {
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("아이스크림-1", "제로콜라-1"));
 
         // when
-        boolean canJoinAnyEvent = Event.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isFalse();
@@ -30,7 +28,7 @@ class EventTest {
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("레드와인-10", "제로콜라-1"));
 
         // when
-        boolean canJoinAnyEvent = Event.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isFalse();
@@ -43,7 +41,7 @@ class EventTest {
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("레드와인-10", "제로콜라-1", "아이스크림-1"));
 
         // when
-        boolean canJoinAnyEvent = Event.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isTrue();
