@@ -13,4 +13,8 @@ public record SelectedMenu(Menu menu, int count) {
         }
         return new SelectedMenu(menu, count);
     }
+
+    public boolean isSameMenuType(final MenuType targetMenuType) {
+        return MenuType.getType(menu) == targetMenuType;
+    }
 }

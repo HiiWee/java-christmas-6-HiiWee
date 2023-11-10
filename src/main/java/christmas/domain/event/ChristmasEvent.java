@@ -8,8 +8,8 @@ public class ChristmasEvent implements Event {
     // TODO 크리스마스 조건 분리
     private static final EventType CHRISTMAS_EVENT = EventType.CHRISTMAS_EVENT;
     private static final int START_DATE = 1;
-    public static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
-    public static final int DISCOUNT_INCREMENT = 100;
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
+    private static final int DISCOUNT_INCREMENT = 100;
 
     @Override
     public int calculateDiscountPrice(final Reservation reservation) {
@@ -17,6 +17,7 @@ public class ChristmasEvent implements Event {
             SelectedDate selectedDate = reservation.selectedDate();
             return DEFAULT_DISCOUNT_AMOUNT + (selectedDate.date() - START_DATE) * DISCOUNT_INCREMENT;
         }
+        // TODO 상수 분리
         return 0;
     }
 }
