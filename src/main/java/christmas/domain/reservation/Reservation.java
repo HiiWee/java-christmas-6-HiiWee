@@ -32,4 +32,9 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
                 .mapToInt(SelectedMenu::count)
                 .sum();
     }
+
+    public boolean hasHigherOrSamePrice(final int compareAmount) {
+        return selectedMenus.calculateTotalPrice() >= compareAmount;
+    }
 }
+

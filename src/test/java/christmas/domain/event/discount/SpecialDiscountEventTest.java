@@ -1,9 +1,12 @@
-package christmas.domain.event;
+package christmas.domain.event.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.event.EventParticipationHistory;
+import christmas.domain.event.EventType;
 import christmas.domain.reservation.Reservation;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,16 +21,18 @@ class SpecialDiscountEventTest {
             25, '아이스크림-1,초코케이크-1,바비큐립-3,티본스테이크-3', 1000
             31, '아이스크림-10,초코케이크-5,바비큐립-5', 1000
             """)
-    void calculateDiscountPrice_with_weekdayEvent(int date, String inputAllMenu, int expectedDiscountPrice) {
+    void participatedEvents_with_weekdayEvent(int date, String inputAllMenu, int expectedDiscountPrice) {
         // given
         List<String> inputMenus = Arrays.stream(inputAllMenu.split(",")).toList();
 
         // when
         DiscountEvent specialDiscountEvent = new SpecialDiscountEvent();
-        int discountPrice = specialDiscountEvent.calculateDiscountPrice(Reservation.createFrom(inputMenus, date));
+        EventParticipationHistory history = new EventParticipationHistory(new EnumMap<>(EventType.class));
+        specialDiscountEvent.participateEvent(history, Reservation.createFrom(inputMenus, date));
+        int actualDiscountPrice = history.participatedEvents().get(EventType.SPECIAL_EVENT);
 
         // then
-        assertThat(discountPrice).isEqualTo(expectedDiscountPrice);
+        assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);
     }
 
 }

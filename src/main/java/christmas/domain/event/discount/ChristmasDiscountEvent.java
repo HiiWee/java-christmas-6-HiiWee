@@ -1,6 +1,8 @@
-package christmas.domain.event;
+package christmas.domain.event.discount;
 
 import christmas.domain.date.SelectedDate;
+import christmas.domain.event.EventParticipationHistory;
+import christmas.domain.event.EventType;
 import christmas.domain.reservation.Reservation;
 
 public class ChristmasDiscountEvent implements DiscountEvent {
@@ -12,12 +14,13 @@ public class ChristmasDiscountEvent implements DiscountEvent {
     private static final int DISCOUNT_INCREMENT = 100;
 
     @Override
-    public int calculateDiscountPrice(final Reservation reservation) {
+    public void participateEvent(final EventParticipationHistory history, final Reservation reservation) {
         if (reservation.containsEventType(CHRISTMAS_EVENT)) {
             SelectedDate selectedDate = reservation.selectedDate();
-            return DEFAULT_DISCOUNT_AMOUNT + (selectedDate.date() - START_DATE) * DISCOUNT_INCREMENT;
+            history.participateEvent(
+                    EventType.CHRISTMAS_EVENT,
+                    DEFAULT_DISCOUNT_AMOUNT + (selectedDate.date() - START_DATE) * DISCOUNT_INCREMENT
+            );
         }
-        // TODO 상수 분리
-        return 0;
     }
 }

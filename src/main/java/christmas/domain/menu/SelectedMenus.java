@@ -23,6 +23,20 @@ public record SelectedMenus(List<SelectedMenu> menus) {
                 .toList());
     }
 
+    public List<MenuType> extractMenuTypes() {
+        return menus.stream()
+                .map(SelectedMenu::menu)
+                .map(MenuType::getType)
+                .distinct()
+                .toList();
+    }
+
+    public int calculateTotalPrice() {
+        return menus.stream()
+                .mapToInt(SelectedMenu::calculateSinglePrice)
+                .sum();
+    }
+
     private static void validate(final List<String> inputMenus) {
         if (isInvalidFormat(inputMenus) || isDuplicates(inputMenus) || hasTooManyMenu(inputMenus)) {
             throw DomainExceptionMessage.INVALID_ORDER.create();
@@ -47,20 +61,5 @@ public record SelectedMenus(List<SelectedMenu> menus) {
                 .map(inputMenu -> inputMenu.split(DELIMITER))
                 .mapToInt(splitMenu -> Integer.parseInt(splitMenu[COUNT_INDEX]))
                 .sum() > LIMIT_MENU_COUNT;
-    }
-
-    public List<MenuType> extractMenuTypes() {
-        return menus.stream()
-                .map(SelectedMenu::menu)
-                .map(MenuType::getType)
-                .distinct()
-                .toList();
-    }
-
-    public int calculateTotalPrice() {
-        return menus.stream()
-                .map(SelectedMenu::menu)
-                .mapToInt(Menu::price)
-                .sum();
     }
 }
