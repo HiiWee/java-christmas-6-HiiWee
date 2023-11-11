@@ -14,7 +14,6 @@ public class ChristmasDiscountEvent implements DiscountEvent {
     @Override
     public void participateEvent(final EventParticipationHistory history, final Reservation reservation) {
         if (reservation.containsEventType(EventType.CHRISTMAS_EVENT)) {
-            System.out.println("pass");
             int date = reservation.getReservedDate();
             history.participateEvent(
                     EventType.CHRISTMAS_EVENT,

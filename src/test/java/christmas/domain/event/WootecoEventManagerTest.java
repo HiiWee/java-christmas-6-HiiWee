@@ -2,7 +2,6 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 
 import christmas.domain.BookingRepository;
@@ -12,10 +11,10 @@ import christmas.domain.event.history.EventParticipationHistory;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
+import christmas.dto.BenefitDetails;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,7 +61,7 @@ class WootecoEventManagerTest {
         EventParticipationHistory history = eventRepository.findEventHistory().get();
         EventBadge eventBadge = eventRepository.findBadge().get();
         int benefitPrice = history.calculateTotalBenefit();
-        Map<Menu, Integer> giftCounts = history.gifts().giftCounts();
+        Map<Menu, Integer> giftCounts = history.giftCounts().giftCounts();
 
         // then
         assertAll(
@@ -72,4 +71,19 @@ class WootecoEventManagerTest {
         );
     }
 
+    @DisplayName("이벤트에 대한 혜택 내역을 받아볼 수 있다.")
+    @Test
+    void createBenefitDetails() {
+        // given
+        EventParticipationHistory history = EventParticipationHistory.getInstance();
+        history.participateEvent(EventType.WEEKEND_EVENT, 555555);
+        eventRepository.saveEventHistory(history);
+
+        // when
+        BenefitDetails benefitDetails = eventManager.createBenefitDetails();
+        int actualBenefit = benefitDetails.benefitPrices().benefitPrices().get(EventType.WEEKEND_EVENT.getEventName());
+
+        // then
+        assertThat(actualBenefit).isEqualTo(555555);
+    }
 }

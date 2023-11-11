@@ -4,7 +4,7 @@ import christmas.domain.event.EventType;
 import christmas.domain.menu.Menu;
 import java.util.EnumMap;
 
-public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventGifts gifts) {
+public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {
 
     public static EventParticipationHistory getInstance() {
         return new EventParticipationHistory(
@@ -18,7 +18,7 @@ public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventG
     }
 
     public void addGift(final Menu giftMenu) {
-        gifts.add(giftMenu);
+        giftCounts.add(giftMenu);
     }
 
     public int calculateTotalBenefit() {

@@ -36,6 +36,10 @@ public enum EventType {
         this.event = event;
     }
 
+    public String getEventName() {
+        return eventName;
+    }
+
     public static List<EventType> findEventTypesFrom(final List<DateType> dateTypes) {
         return dateTypes.stream()
                 .map(EVENT_TYPE_CACHE::get)
