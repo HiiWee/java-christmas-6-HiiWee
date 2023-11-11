@@ -15,8 +15,14 @@ public class WootecoEventManager {
     public void applyAllEvents(final WootecoRestaurantManager restaurantManager) {
         Reservation reservation = restaurantManager.findReservationObject();
         EventParticipationHistory history = EventParticipationHistory.getInstance();
-        System.out.println(reservation.getReservedDate() + " " + reservation.getTotalPrice());
         EventType.joinEvents(reservation, history);
+        applyBadge(history);
         eventRepository.saveEventHistory(history);
+    }
+
+    private void applyBadge(final EventParticipationHistory history) {
+        int totalBenefit = history.calculateTotalBenefit();
+        EventBadge badge = EventBadge.findBadge(totalBenefit);
+        eventRepository.saveBadge(badge);
     }
 }

@@ -14,6 +14,13 @@ public record EventBenefits(Map<EventType, Integer> events) {
     }
 
     public void updateBenefit(final EventType eventType, final int benefitAmount) {
-        events.put(eventType, events.getOrDefault(eventType, 0) + benefitAmount);
+        events.put(eventType, events.getOrDefault(eventType, DEFAULT_VALUE) + benefitAmount);
+    }
+
+    public int extractTotalBenefit() {
+        return events.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 }

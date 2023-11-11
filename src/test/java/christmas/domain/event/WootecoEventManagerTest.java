@@ -46,7 +46,7 @@ class WootecoEventManagerTest {
     }
 
 
-    @DisplayName("이벤트에 등록하면 이벤트에 대한 혜택 기록을 저장할 수 있다.")
+    @DisplayName("이벤트에 등록하면 이벤트에 대한 혜택 기록을 저장하고 뱃지를 받을 수 있다.")
     @Test
     void applyAllEvents() {
         // given
@@ -60,17 +60,13 @@ class WootecoEventManagerTest {
         // when
         eventManager.applyAllEvents(restaurantManager);
         EventParticipationHistory history = eventRepository.findEventHistory().get();
-        int benefitPrice = history.benefits()
-                .events()
-                .values()
-                .stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        List<Menu> menus = history.gifts()
-                .menus();
+        EventBadge eventBadge = eventRepository.findBadge().get();
+        int benefitPrice = history.calculateTotalBenefit();
+        List<Menu> menus = history.gifts().menus();
 
         // then
         assertAll(
+                () -> assertThat(eventBadge).isEqualTo(EventBadge.SANTA),
                 () -> assertThat(benefitPrice).isEqualTo(expectedBenefitPrice),
                 () -> assertThat(menus).contains(Menu.CHAMPAGNE)
         );

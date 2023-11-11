@@ -21,4 +21,8 @@ public record EventParticipationHistory(EventBenefits benefits, EventGifts gifts
     public void addGift(final Menu giftMenu) {
         gifts.add(giftMenu);
     }
+
+    public int calculateTotalBenefit() {
+        return benefits.extractTotalBenefit();
+    }
 }
