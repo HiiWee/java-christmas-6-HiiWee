@@ -62,15 +62,14 @@ class WootecoEventManagerTest {
         EventParticipationHistory history = eventRepository.findEventHistory().get();
         EventBadge eventBadge = eventRepository.findBadge().get();
         int benefitPrice = history.calculateTotalBenefit();
-        List<Menu> menus = history.gifts().menus();
+        Map<Menu, Integer> giftCounts = history.gifts().giftCounts();
 
         // then
         assertAll(
                 () -> assertThat(eventBadge).isEqualTo(EventBadge.SANTA),
                 () -> assertThat(benefitPrice).isEqualTo(expectedBenefitPrice),
-                () -> assertThat(menus).contains(Menu.CHAMPAGNE)
+                () -> assertThat(giftCounts.get(Menu.CHAMPAGNE)).isEqualTo(1)
         );
-
     }
 
 }

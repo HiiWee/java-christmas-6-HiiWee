@@ -35,7 +35,7 @@ class ChristmasDiscountEventTest {
         EventParticipationHistory history = EventParticipationHistory.getInstance();
         discountEvent.participateEvent(history, reservation);
         System.out.println(history);
-        int actualDiscountPrice = history.benefits().events().get(EventType.CHRISTMAS_EVENT);
+        int actualDiscountPrice = history.benefitPrices().events().get(EventType.CHRISTMAS_EVENT);
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);

@@ -4,7 +4,7 @@ import christmas.domain.event.EventType;
 import java.util.Collections;
 import java.util.Map;
 
-public record EventBenefits(Map<EventType, Integer> events) {
+public record EventBenefitPrices(Map<EventType, Integer> events) {
 
     private static final int DEFAULT_VALUE = 0;
 

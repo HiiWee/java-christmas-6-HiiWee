@@ -27,7 +27,7 @@ class ChampagneGiftEventTest {
         EventParticipationHistory history = EventParticipationHistory.getInstance();
         GiftEvent champagneGiftEvent = new ChampagneGiftEvent();
         champagneGiftEvent.participateEvent(history, reservation);
-        int actualDiscountPrice = history.benefits().events().get(EventType.GIVING_EVENT);
+        int actualDiscountPrice = history.benefitPrices().events().get(EventType.GIVING_EVENT);
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(Menu.CHAMPAGNE.price());

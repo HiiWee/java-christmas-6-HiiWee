@@ -32,7 +32,7 @@ class WeekendDiscountEventTest {
         DiscountEvent weekendDiscountEvent = new WeekendDiscountEvent();
         EventParticipationHistory history = EventParticipationHistory.getInstance();
         weekendDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
-        int actualDiscountPrice = history.benefits().events().get(EventType.WEEKEND_EVENT);
+        int actualDiscountPrice = history.benefitPrices().events().get(EventType.WEEKEND_EVENT);
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);

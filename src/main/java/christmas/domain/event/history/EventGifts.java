@@ -2,16 +2,16 @@ package christmas.domain.event.history;
 
 import christmas.domain.menu.Menu;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
-public record EventGifts(List<Menu> menus) {
+public record EventGifts(Map<Menu, Integer> giftCounts) {
 
     @Override
-    public List<Menu> menus() {
-        return Collections.unmodifiableList(menus);
+    public Map<Menu, Integer> giftCounts() {
+        return Collections.unmodifiableMap(giftCounts);
     }
 
     public void add(final Menu menu) {
-        menus.add(menu);
+        giftCounts.put(menu, giftCounts.getOrDefault(menu, 0) + 1);
     }
 }
