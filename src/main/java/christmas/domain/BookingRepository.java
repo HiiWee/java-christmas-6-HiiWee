@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.domain.date.SelectedDate;
 import christmas.domain.menu.SelectedMenus;
+import christmas.domain.reservation.Reservation;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
@@ -18,11 +19,19 @@ public class BookingRepository {
         stores.put(BookingType.SELECTED_MENUS, selectedMenus);
     }
 
+    public void saveReservation(final Reservation reservation) {
+        stores.put(BookingType.RESERVATION, reservation);
+    }
+
     public Optional<SelectedDate> findSelectedDate() {
         return Optional.ofNullable((SelectedDate) stores.get(BookingType.SELECTED_DATE));
     }
 
     public Optional<SelectedMenus> findSelectedMenus() {
         return Optional.ofNullable((SelectedMenus) stores.get(BookingType.SELECTED_MENUS));
+    }
+
+    public Optional<Reservation> findReservation() {
+        return Optional.ofNullable((Reservation) stores.get(BookingType.RESERVATION));
     }
 }

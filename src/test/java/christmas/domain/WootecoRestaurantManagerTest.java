@@ -45,7 +45,7 @@ class WootecoRestaurantManagerTest {
         SelectedMenus expectedMenus = SelectedMenus.createFrom(inputMenus);
 
         // when
-        manager.addSelectedMenu(inputMenus);
+        manager.addSelectedMenus(inputMenus);
         SelectedMenus actualMenus = repository.findSelectedMenus().get();
 
         // then
@@ -61,7 +61,8 @@ class WootecoRestaurantManagerTest {
                 타파스 10개""";
         String expectedTotalPriceMessage = "125,000원";
         manager.addSelectedDate("10");
-        manager.addSelectedMenu(List.of("해산물파스타-2", "타파스-10"));
+        manager.addSelectedMenus(List.of("해산물파스타-2", "타파스-10"));
+        manager.updateReservation();
 
         // when
         ReservedResults reservedResults = manager.createReservationResults();

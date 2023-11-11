@@ -7,15 +7,7 @@ import christmas.domain.menu.SelectedMenu;
 import christmas.domain.menu.SelectedMenus;
 import java.util.List;
 
-public class Reservation {
-
-    private final SelectedMenus selectedMenus;
-    private final SelectedDate selectedDate;
-
-    public Reservation(final SelectedMenus selectedMenus, final SelectedDate selectedDate) {
-        this.selectedMenus = selectedMenus;
-        this.selectedDate = selectedDate;
-    }
+public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate) {
 
     public boolean containsEventType(final EventType eventType) {
         List<EventType> reservationEventTypes = findEventTypes();
@@ -49,5 +41,8 @@ public class Reservation {
     public int getReservedDate() {
         return selectedDate.date();
     }
-}
 
+    public List<MenuType> getMenuTypes() {
+        return selectedMenus.extractMenuTypes();
+    }
+}

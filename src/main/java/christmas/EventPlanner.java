@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.domain.WootecoRestaurantManager;
+import christmas.domain.event.WootecoEventManager;
 import christmas.dto.ReservedResults;
 import christmas.exception.ExceptionResolver;
 import christmas.view.InputView;
@@ -10,31 +11,35 @@ public class EventPlanner {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final WootecoRestaurantManager manager;
+    private final WootecoRestaurantManager restaurantManager;
+    private final WootecoEventManager eventManager;
 
     public EventPlanner(final InputView inputView, final OutputView outputView,
-                        final WootecoRestaurantManager manager) {
+                        final WootecoRestaurantManager restaurantManager, final WootecoEventManager eventManager) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.manager = manager;
+        this.restaurantManager = restaurantManager;
+        this.eventManager = eventManager;
     }
 
     public void run() {
-        inputVisitDate();
-        inputMenus();
+        inputReservationInfo();
+        applyEventBenefit();
         printReservationResults();
     }
 
-    private void inputVisitDate() {
-        ExceptionResolver.resolveProcessWithInput(manager::addSelectedDate, inputView::inputVisitDate);
+    private void inputReservationInfo() {
+        ExceptionResolver.resolveProcessWithInput(restaurantManager::addSelectedDate, inputView::inputVisitDate);
+        ExceptionResolver.resolveProcessWithInput(restaurantManager::addSelectedMenus, inputView::inputMenus);
+        restaurantManager.updateReservation();
     }
 
-    private void inputMenus() {
-        ExceptionResolver.resolveProcessWithInput(manager::addSelectedMenu, inputView::inputMenus);
+    private void applyEventBenefit() {
+        eventManager.applyAllEvents(restaurantManager);
     }
 
     private void printReservationResults() {
-        ReservedResults results = manager.createReservationResults();
+        ReservedResults results = restaurantManager.createReservationResults();
         outputView.printReservationResults(results);
     }
 }

@@ -1,7 +1,7 @@
 package christmas.domain.event.discount;
 
-import christmas.domain.event.EventParticipationHistory;
 import christmas.domain.event.EventType;
+import christmas.domain.event.history.EventParticipationHistory;
 import christmas.domain.menu.MenuType;
 import christmas.domain.reservation.Reservation;
 

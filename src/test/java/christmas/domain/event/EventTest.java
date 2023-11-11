@@ -1,21 +1,24 @@
-package christmas.domain.event.discount;
+package christmas.domain.event;
 
+import christmas.domain.date.SelectedDate;
 import christmas.domain.menu.SelectedMenus;
+import christmas.domain.reservation.Reservation;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class DiscountEventTest {
+class EventTest {
 
     @DisplayName("10_000원 이하의 금액일 경우 이벤트를 참여할 수 없다.")
     @Test
     void canNotJoinEvent_lessThan10_000() {
         // given
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("아이스크림-1", "제로콜라-1"));
+        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
 
         // when
-        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isFalse();
@@ -26,9 +29,10 @@ class DiscountEventTest {
     void canNotJoinEvent_onlyBeverage() {
         // given
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("레드와인-10", "제로콜라-1"));
+        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
 
         // when
-        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isFalse();
@@ -39,9 +43,10 @@ class DiscountEventTest {
     void canJoinAnyEvent() {
         // given
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("레드와인-10", "제로콜라-1", "아이스크림-1"));
+        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
 
         // when
-        boolean canJoinAnyEvent = DiscountEvent.canJoinAnyEvent(selectedMenus);
+        boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
 
         // then
         Assertions.assertThat(canJoinAnyEvent).isTrue();

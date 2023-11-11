@@ -3,13 +3,11 @@ package christmas.domain.event.discount;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.date.SelectedDate;
-import christmas.domain.event.EventParticipationHistory;
 import christmas.domain.event.EventType;
-import christmas.domain.menu.SelectedMenu;
+import christmas.domain.event.history.EventParticipationHistory;
 import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,9 +30,9 @@ class WeekendDiscountEventTest {
 
         // when
         DiscountEvent weekendDiscountEvent = new WeekendDiscountEvent();
-        EventParticipationHistory history = new EventParticipationHistory(new EnumMap<>(EventType.class));
+        EventParticipationHistory history = EventParticipationHistory.getInstance();
         weekendDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
-        int actualDiscountPrice = history.participatedEvents().get(EventType.WEEKEND_EVENT);
+        int actualDiscountPrice = history.benefits().events().get(EventType.WEEKEND_EVENT);
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);

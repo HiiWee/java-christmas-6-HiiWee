@@ -6,6 +6,7 @@ import christmas.domain.reservation.Reservation;
 import christmas.dto.ReservedResults;
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.List;
+import java.util.Optional;
 
 public class WootecoRestaurantManager {
 
@@ -20,7 +21,7 @@ public class WootecoRestaurantManager {
         bookingRepository.saveSelectedDate(selectedDate);
     }
 
-    public void addSelectedMenu(final List<String> inputMenus) {
+    public void addSelectedMenus(final List<String> inputMenus) {
         SelectedMenus selectedMenus = SelectedMenus.createFrom(inputMenus);
         bookingRepository.saveSelectedMenus(selectedMenus);
     }
@@ -30,11 +31,26 @@ public class WootecoRestaurantManager {
         return ReservedResults.createFrom(reservation);
     }
 
-    private Reservation findReservationObject() {
-        SelectedDate selectedDate = bookingRepository.findSelectedDate()
+    public void updateReservation() {
+        Optional<Reservation> optionalReservation = bookingRepository.findReservation();
+        if (optionalReservation.isEmpty()) {
+            Reservation reservation = new Reservation(findSelectedMenusObject(), findSelectedDateObject());
+            bookingRepository.saveReservation(reservation);
+        }
+    }
+
+    public Reservation findReservationObject() {
+        return bookingRepository.findReservation()
+                .orElseThrow(DomainExceptionMessage.NOT_FOUND_RESERVATION::create);
+    }
+
+    private SelectedDate findSelectedDateObject() {
+        return bookingRepository.findSelectedDate()
                 .orElseThrow(DomainExceptionMessage.NOT_FOUND_SELECTED_DATE::create);
-        SelectedMenus selectedMenus = bookingRepository.findSelectedMenus()
-                .orElseThrow(DomainExceptionMessage.NOT_FOUND_SELECTED_MENUS::create);
-        return new Reservation(selectedMenus, selectedDate);
+    }
+
+    private SelectedMenus findSelectedMenusObject() {
+        return bookingRepository.findSelectedMenus()
+                .orElseThrow(DomainExceptionMessage.NOT_FOUND_MENU_TYPE::create);
     }
 }
