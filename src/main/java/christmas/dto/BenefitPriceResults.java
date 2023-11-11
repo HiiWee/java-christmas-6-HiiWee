@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public record ResultBenefitPrices(Map<String, Integer> benefitPrices) {
+public record BenefitPriceResults(Map<String, Integer> benefitPrices) {
 
     private static final String MESSAGE_FORMAT = "%s: -%,d원";
     private static final String DELIMITER = "\n";
 
-    public static ResultBenefitPrices createFrom(final EventBenefitPrices benefitPrices) {
-        return new ResultBenefitPrices(
+    public static BenefitPriceResults createFrom(final EventBenefitPrices benefitPrices) {
+        return new BenefitPriceResults(
                 benefitPrices.events()
                         .entrySet()
                         .stream()

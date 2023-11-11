@@ -2,7 +2,9 @@ package christmas;
 
 import christmas.domain.WootecoRestaurantManager;
 import christmas.domain.event.WootecoEventManager;
+import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
+import christmas.dto.PaymentAmountResult;
 import christmas.dto.ReservedResults;
 import christmas.exception.ExceptionResolver;
 import christmas.view.InputView;
@@ -28,6 +30,8 @@ public class EventPlanner {
         applyEventBenefit();
         printReservationResults();
         printBenefitDetails();
+        printPaymentAmount();
+        printEventBadge();
     }
 
     private void inputReservationInfo() {
@@ -48,5 +52,15 @@ public class EventPlanner {
     private void printBenefitDetails() {
         BenefitDetails benefitDetails = eventManager.createBenefitDetails();
         outputView.printBenefitDetails(benefitDetails);
+    }
+
+    private void printPaymentAmount() {
+        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager);
+        outputView.printPaymentAmount(paymentAmount);
+    }
+
+    private void printEventBadge() {
+        BadgeResult badgeResult = eventManager.selectEventBadge();
+        outputView.printEventBadge(badgeResult);
     }
 }

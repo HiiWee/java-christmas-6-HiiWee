@@ -1,6 +1,8 @@
 package christmas.view;
 
+import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
+import christmas.dto.PaymentAmountResult;
 import christmas.dto.ReservedResults;
 
 public class OutputView {
@@ -11,6 +13,8 @@ public class OutputView {
     private static final String GIFT_MENU_MESSAGE = "<증정 메뉴>";
     private static final String BENEFIT_DETAIL_MESSAGE = "<혜택 내역>";
     private static final String TOTAL_BENEFIT_PRICE_MESSAGE = "<총혜택 금액>";
+    private static final String EXPECT_PAYMENT_AMOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
 
     public void printReservationResults(final ReservedResults results) {
         System.out.println(EVENT_BENEFIT_INFORMATION_MESSAGE);
@@ -35,5 +39,15 @@ public class OutputView {
         System.out.println(benefitDetails.createBenefitDetailsMessage());
         System.out.println(TOTAL_BENEFIT_PRICE_MESSAGE);
         System.out.println(benefitDetails.getTotalBenefitPriceMessage());
+    }
+
+    public void printPaymentAmount(final PaymentAmountResult paymentAmount) {
+        System.out.println(EXPECT_PAYMENT_AMOUNT_MESSAGE);
+        System.out.println(paymentAmount.createMessage());
+    }
+
+    public void printEventBadge(final BadgeResult badgeResult) {
+        System.out.println(EVENT_BADGE_MESSAGE);
+        System.out.println(badgeResult.name());
     }
 }

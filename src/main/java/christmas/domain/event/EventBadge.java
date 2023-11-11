@@ -27,4 +27,8 @@ public enum EventBadge {
     private boolean canGetBadge(final int benefit) {
         return benefit >= winningPrice;
     }
+
+    public String getName() {
+        return name;
+    }
 }

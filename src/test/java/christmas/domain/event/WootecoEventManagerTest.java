@@ -11,7 +11,9 @@ import christmas.domain.event.history.EventParticipationHistory;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
+import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
+import christmas.dto.PaymentAmountResult;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -85,5 +87,42 @@ class WootecoEventManagerTest {
 
         // then
         assertThat(actualBenefit).isEqualTo(555555);
+    }
+
+    @DisplayName("혜택을 적용한 최종 결제 금액을 알 수 있다.")
+    @Test
+    void createPaymentAmount() {
+        // given
+        int eventBenefit = 50_000;
+        int menuPrice = 145_000;
+        EventParticipationHistory history = EventParticipationHistory.getInstance();
+        history.participateEvent(EventType.WEEKEND_EVENT, eventBenefit);
+        Reservation reservation = new Reservation(
+                SelectedMenus.createFrom(List.of("해산물파스타-2", "레드와인-1", "초코케이크-1")),
+                SelectedDate.createFrom("24")
+        );
+        given(bookingRepository.findReservation()).willReturn(Optional.of(reservation));
+
+        // when
+        eventRepository.saveEventHistory(history);
+        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager);
+
+        // then
+        assertThat(paymentAmount.paymentAmount()).isEqualTo(menuPrice - eventBenefit);
+    }
+
+    @DisplayName("혜택 금액에 따른 이벤트 배지를 받을 수 있다.")
+    @Test
+    void selectEventBadge() {
+        // given
+        EventParticipationHistory history = EventParticipationHistory.getInstance();
+        history.participateEvent(EventType.WEEKEND_EVENT, 20_000);
+
+        // when
+        eventRepository.saveEventHistory(history);
+        BadgeResult badgeResult = eventManager.selectEventBadge();
+
+        // then
+        assertThat(badgeResult.name()).isEqualTo(EventBadge.SANTA.getName());
     }
 }

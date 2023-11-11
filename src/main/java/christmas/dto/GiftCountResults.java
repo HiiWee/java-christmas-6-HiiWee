@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public record ResultGiftCounts(Map<String, Integer> giftCounts) {
+public record GiftCountResults(Map<String, Integer> giftCounts) {
 
     private static final String MESSAGE_FORMAT = "%s %d개";
     private static final String DELIMITER = "\n";
 
-    public static ResultGiftCounts createFrom(final EventGifts giftCounts) {
-        return new ResultGiftCounts(
+    public static GiftCountResults createFrom(final EventGifts giftCounts) {
+        return new GiftCountResults(
                 giftCounts.giftCounts()
                         .entrySet()
                         .stream()

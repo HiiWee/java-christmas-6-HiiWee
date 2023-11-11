@@ -3,7 +3,9 @@ package christmas.domain.event;
 import christmas.domain.WootecoRestaurantManager;
 import christmas.domain.event.history.EventParticipationHistory;
 import christmas.domain.reservation.Reservation;
+import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
+import christmas.dto.PaymentAmountResult;
 import christmas.validator.domain.exception.DomainExceptionMessage;
 
 public class WootecoEventManager {
@@ -31,6 +33,21 @@ public class WootecoEventManager {
     public BenefitDetails createBenefitDetails() {
         EventParticipationHistory history = findEventHistoryObject();
         return BenefitDetails.createFrom(history);
+    }
+
+    public PaymentAmountResult createPaymentAmount(final WootecoRestaurantManager restaurantManager) {
+        Reservation reservation = restaurantManager.findReservationObject();
+        int totalPrice = reservation.getTotalPrice();
+        EventParticipationHistory history = findEventHistoryObject();
+        int totalBenefit = history.calculateTotalBenefit();
+        return new PaymentAmountResult(totalPrice - totalBenefit);
+    }
+
+    public BadgeResult selectEventBadge() {
+        EventParticipationHistory history = findEventHistoryObject();
+        int totalBenefit = history.calculateTotalBenefit();
+        EventBadge badge = EventBadge.findBadge(totalBenefit);
+        return BadgeResult.createFrom(badge);
     }
 
     private EventParticipationHistory findEventHistoryObject() {
