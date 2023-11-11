@@ -40,4 +40,8 @@ public enum Menu {
     public int price() {
         return price;
     }
+
+    public String getName() {
+        return name;
+    }
 }

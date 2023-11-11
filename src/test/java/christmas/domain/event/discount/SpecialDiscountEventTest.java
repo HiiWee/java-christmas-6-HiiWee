@@ -2,8 +2,10 @@ package christmas.domain.event.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.date.SelectedDate;
 import christmas.domain.event.EventParticipationHistory;
 import christmas.domain.event.EventType;
+import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -24,11 +26,13 @@ class SpecialDiscountEventTest {
     void participatedEvents_with_weekdayEvent(String date, String inputAllMenu, int expectedDiscountPrice) {
         // given
         List<String> inputMenus = Arrays.stream(inputAllMenu.split(",")).toList();
+        SelectedMenus selectedMenus = SelectedMenus.createFrom(inputMenus);
+        SelectedDate selectedDate = SelectedDate.createFrom(date);
 
         // when
         DiscountEvent specialDiscountEvent = new SpecialDiscountEvent();
         EventParticipationHistory history = new EventParticipationHistory(new EnumMap<>(EventType.class));
-        specialDiscountEvent.participateEvent(history, Reservation.createFrom(inputMenus, date));
+        specialDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
         int actualDiscountPrice = history.participatedEvents().get(EventType.SPECIAL_EVENT);
 
         // then

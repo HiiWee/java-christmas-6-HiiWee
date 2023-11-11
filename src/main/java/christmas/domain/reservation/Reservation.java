@@ -7,13 +7,14 @@ import christmas.domain.menu.SelectedMenu;
 import christmas.domain.menu.SelectedMenus;
 import java.util.List;
 
-public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate) {
+public class Reservation {
 
-    public static Reservation createFrom(final List<String> inputMenus, final String date) {
-        return new Reservation(
-                SelectedMenus.createFrom(inputMenus),
-                SelectedDate.createFrom(date)
-        );
+    private final SelectedMenus selectedMenus;
+    private final SelectedDate selectedDate;
+
+    public Reservation(final SelectedMenus selectedMenus, final SelectedDate selectedDate) {
+        this.selectedMenus = selectedMenus;
+        this.selectedDate = selectedDate;
     }
 
     public boolean containsEventType(final EventType eventType) {
@@ -35,6 +36,18 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
 
     public boolean hasHigherOrSamePrice(final int compareAmount) {
         return selectedMenus.calculateTotalPrice() >= compareAmount;
+    }
+
+    public List<SelectedMenu> getSelectedMenus() {
+        return selectedMenus.menus();
+    }
+
+    public int getTotalPrice() {
+        return selectedMenus.calculateTotalPrice();
+    }
+
+    public int getReservedDate() {
+        return selectedDate.date();
     }
 }
 

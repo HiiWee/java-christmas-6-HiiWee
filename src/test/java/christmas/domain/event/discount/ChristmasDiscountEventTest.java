@@ -2,8 +2,10 @@ package christmas.domain.event.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.date.SelectedDate;
 import christmas.domain.event.EventParticipationHistory;
 import christmas.domain.event.EventType;
+import christmas.domain.menu.SelectedMenus;
 import christmas.domain.reservation.Reservation;
 import java.util.EnumMap;
 import java.util.List;
@@ -24,7 +26,10 @@ class ChristmasDiscountEventTest {
             """)
     void participatedEvents_with_christmasEvent(String date, int expectedDiscountPrice) {
         // given
-        Reservation reservation = Reservation.createFrom(List.of("양송이수프-1", "타파스-2"), date);
+        Reservation reservation = new Reservation(
+                SelectedMenus.createFrom(List.of("양송이수프-1", "타파스-2")),
+                SelectedDate.createFrom(date)
+        );
 
         // when
         DiscountEvent discountEvent = new ChristmasDiscountEvent();

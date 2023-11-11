@@ -1,6 +1,7 @@
 package christmas;
 
 import christmas.domain.WootecoRestaurantManager;
+import christmas.dto.ReservedResults;
 import christmas.exception.ExceptionResolver;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -21,6 +22,7 @@ public class EventPlanner {
     public void run() {
         inputVisitDate();
         inputMenus();
+        printReservationResults();
     }
 
     private void inputVisitDate() {
@@ -29,5 +31,10 @@ public class EventPlanner {
 
     private void inputMenus() {
         ExceptionResolver.resolveProcessWithInput(manager::addSelectedMenu, inputView::inputMenus);
+    }
+
+    private void printReservationResults() {
+        ReservedResults results = manager.createReservationResults();
+        outputView.printReservationResults(results);
     }
 }

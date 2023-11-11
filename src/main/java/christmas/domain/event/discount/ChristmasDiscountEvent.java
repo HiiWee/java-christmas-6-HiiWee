@@ -1,6 +1,5 @@
 package christmas.domain.event.discount;
 
-import christmas.domain.date.SelectedDate;
 import christmas.domain.event.EventParticipationHistory;
 import christmas.domain.event.EventType;
 import christmas.domain.reservation.Reservation;
@@ -16,10 +15,10 @@ public class ChristmasDiscountEvent implements DiscountEvent {
     @Override
     public void participateEvent(final EventParticipationHistory history, final Reservation reservation) {
         if (reservation.containsEventType(CHRISTMAS_EVENT)) {
-            SelectedDate selectedDate = reservation.selectedDate();
+            int date = reservation.getReservedDate();
             history.participateEvent(
                     EventType.CHRISTMAS_EVENT,
-                    DEFAULT_DISCOUNT_AMOUNT + (selectedDate.date() - START_DATE) * DISCOUNT_INCREMENT
+                    DEFAULT_DISCOUNT_AMOUNT + (date - START_DATE) * DISCOUNT_INCREMENT
             );
         }
     }

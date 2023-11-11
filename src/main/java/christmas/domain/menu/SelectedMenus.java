@@ -1,6 +1,7 @@
 package christmas.domain.menu;
 
 import christmas.validator.domain.exception.DomainExceptionMessage;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -23,6 +24,11 @@ public record SelectedMenus(List<SelectedMenu> menus) {
                 .toList());
     }
 
+    @Override
+    public List<SelectedMenu> menus() {
+        return Collections.unmodifiableList(menus);
+    }
+
     public List<MenuType> extractMenuTypes() {
         return menus.stream()
                 .map(SelectedMenu::menu)
@@ -37,6 +43,7 @@ public record SelectedMenus(List<SelectedMenu> menus) {
                 .sum();
     }
 
+    // TODO 검증문 리팩토링 하기
     private static void validate(final List<String> inputMenus) {
         if (isInvalidFormat(inputMenus) || isDuplicates(inputMenus) || hasTooManyMenu(inputMenus)) {
             throw DomainExceptionMessage.INVALID_ORDER.create();
