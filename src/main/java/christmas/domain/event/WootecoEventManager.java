@@ -1,12 +1,12 @@
 package christmas.domain.event;
 
 import christmas.domain.event.eventhistory.EventParticipationHistory;
-import christmas.domain.restaurant.WootecoRestaurantManager;
 import christmas.domain.restaurant.reservation.Reservation;
 import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
 import christmas.dto.PaymentAmountResult;
 import christmas.validator.domain.exception.DomainExceptionMessage;
+import java.util.function.Supplier;
 
 public class WootecoEventManager {
 
@@ -16,18 +16,10 @@ public class WootecoEventManager {
         this.eventRepository = eventRepository;
     }
 
-    public void applyAllEvents(final WootecoRestaurantManager restaurantManager) {
-        Reservation reservation = restaurantManager.findReservationObject();
+    public void applyAllEvents(final Supplier<Reservation> reservationSupplier) {
         EventParticipationHistory history = EventParticipationHistory.getInstance();
-        EventType.joinEvents(reservation, history);
-        applyBadge(history);
+        EventType.joinEvents(reservationSupplier.get(), history);
         eventRepository.saveEventHistory(history);
-    }
-
-    private void applyBadge(final EventParticipationHistory history) {
-        int totalBenefit = history.calculateTotalBenefit();
-        EventBadge badge = EventBadge.findBadge(totalBenefit);
-        eventRepository.saveBadge(badge);
     }
 
     public BenefitDetails createBenefitDetails() {
@@ -35,18 +27,14 @@ public class WootecoEventManager {
         return BenefitDetails.createFrom(history);
     }
 
-    public PaymentAmountResult createPaymentAmount(final WootecoRestaurantManager restaurantManager) {
-        Reservation reservation = restaurantManager.findReservationObject();
-        int totalPrice = reservation.getTotalPrice();
+    public PaymentAmountResult createPaymentAmount(final Supplier<Reservation> reservationSupplier) {
         EventParticipationHistory history = findEventHistoryObject();
-        int totalBenefit = history.calculateTotalBenefit();
-        return new PaymentAmountResult(totalPrice - totalBenefit);
+        return PaymentAmountResult.createFrom(history, reservationSupplier.get());
     }
 
     public BadgeResult selectEventBadge() {
         EventParticipationHistory history = findEventHistoryObject();
-        int totalBenefit = history.calculateTotalBenefit();
-        EventBadge badge = EventBadge.findBadge(totalBenefit);
+        EventBadge badge = EventBadge.findBadge(history.calculateTotalBenefit());
         return BadgeResult.createFrom(badge);
     }
 

@@ -59,10 +59,10 @@ class WootecoEventManagerTest {
         given(bookingRepository.findReservation()).willReturn(Optional.of(reservation));
 
         // when
-        eventManager.applyAllEvents(restaurantManager);
+        eventManager.applyAllEvents(restaurantManager::findReservationObject);
         EventParticipationHistory history = eventRepository.findEventHistory().get();
-        EventBadge eventBadge = eventRepository.findBadge().get();
         int benefitPrice = history.calculateTotalBenefit();
+        EventBadge eventBadge = EventBadge.findBadge(benefitPrice);
         Map<Menu, Integer> giftCounts = history.giftCounts().giftCounts();
 
         // then
@@ -105,7 +105,7 @@ class WootecoEventManagerTest {
 
         // when
         eventRepository.saveEventHistory(history);
-        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager);
+        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager::findReservationObject);
 
         // then
         assertThat(paymentAmount.paymentAmount()).isEqualTo(menuPrice - eventBenefit);

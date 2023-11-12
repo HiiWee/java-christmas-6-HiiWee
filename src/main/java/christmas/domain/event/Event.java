@@ -10,7 +10,7 @@ public interface Event {
     static boolean canJoinAnyEvent(final Reservation reservation) {
         List<MenuType> menuTypes = reservation.getUniqueMenuTypes();
         int totalPrice = reservation.getTotalPrice();
-        return MenuType.isNotOnlyBeverage(menuTypes) && EventCondition.isMoreThanMinPrice(totalPrice);
+        return MenuType.isNotOnlyBeverage(menuTypes) && EventCondition.canParticipatePrice(totalPrice);
     }
 
     void participateEvent(final EventParticipationHistory history, final Reservation reservation);
