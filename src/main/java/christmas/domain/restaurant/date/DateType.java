@@ -18,7 +18,7 @@ public enum DateType {
         this.dates = dates;
     }
 
-    public static List<DateType> findWeekTypes(final int date) {
+    public static List<DateType> findDatTypes(final int date) {
         return Arrays.stream(values())
                 .filter(dateType -> dateType.containsDate(date))
                 .toList();

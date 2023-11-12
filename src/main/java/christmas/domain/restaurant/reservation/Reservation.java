@@ -1,6 +1,7 @@
 package christmas.domain.restaurant.reservation;
 
 import christmas.domain.event.EventType;
+import christmas.domain.restaurant.date.DateType;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.MenuType;
 import christmas.domain.restaurant.menu.SelectedMenu;
@@ -12,10 +13,6 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
     public boolean containsEventType(final EventType eventType) {
         List<EventType> reservationEventTypes = findEventTypes();
         return reservationEventTypes.contains(eventType);
-    }
-
-    private List<EventType> findEventTypes() {
-        return EventType.findEventTypesFrom(selectedDate.dateTypes());
     }
 
     public int extractMenuTypeCount(final MenuType targetMenuType) {
@@ -44,5 +41,10 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
 
     public List<MenuType> getMenuTypes() {
         return selectedMenus.extractMenuTypes();
+    }
+
+    private List<EventType> findEventTypes() {
+        List<DateType> datTypes = DateType.findDatTypes(selectedDate.date());
+        return EventType.findEventTypesFrom(datTypes);
     }
 }
