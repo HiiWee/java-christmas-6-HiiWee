@@ -18,7 +18,7 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
         return EventType.findEventTypesFrom(selectedDate.dateTypes());
     }
 
-    public int countMenuTypeFrom(final MenuType targetMenuType) {
+    public int extractMenuTypeCount(final MenuType targetMenuType) {
         return selectedMenus.menus()
                 .stream()
                 .filter(selectedMenu -> selectedMenu.isSameMenuType(targetMenuType))

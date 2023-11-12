@@ -17,7 +17,7 @@ public enum MenuType {
         this.menus = menus;
     }
 
-    public static MenuType getType(final Menu menu) {
+    public static MenuType findType(final Menu menu) {
         return Arrays.stream(values())
                 .filter(menuType -> menuType.contains(menu))
                 .findAny()

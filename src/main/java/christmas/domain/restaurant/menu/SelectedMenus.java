@@ -21,7 +21,7 @@ public record SelectedMenus(List<SelectedMenu> menus) {
     public List<MenuType> extractMenuTypes() {
         return menus.stream()
                 .map(SelectedMenu::menu)
-                .map(MenuType::getType)
+                .map(MenuType::findType)
                 .distinct()
                 .toList();
     }

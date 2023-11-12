@@ -26,7 +26,7 @@ public record SelectedMenu(Menu menu, int count) {
     }
 
     public boolean isSameMenuType(final MenuType targetMenuType) {
-        return MenuType.getType(menu) == targetMenuType;
+        return MenuType.findType(menu) == targetMenuType;
     }
 
     public int calculateSinglePrice() {
