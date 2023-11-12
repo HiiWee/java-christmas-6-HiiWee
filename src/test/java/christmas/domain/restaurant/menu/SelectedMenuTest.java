@@ -1,5 +1,6 @@
 package christmas.domain.restaurant.menu;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 
@@ -34,5 +35,31 @@ class SelectedMenuTest {
         // given & when & then
         assertThatIllegalArgumentException().isThrownBy(() -> SelectedMenu.createFrom("시저샐러드-0"))
                 .withMessageContaining(DomainExceptionMessage.INVALID_ORDER.message());
+    }
+
+    @DisplayName("동일한 메뉴 타입이라면 참을 반환한다.")
+    @Test
+    void isSameMenuType() {
+        // given
+        SelectedMenu selectedMenu = SelectedMenu.createFrom("시저샐러드-10");
+
+        // when
+        boolean isSameMenuType = selectedMenu.isSameMenuType(MenuType.APPETIZER);
+
+        // then
+        assertThat(isSameMenuType).isTrue();
+    }
+
+    @DisplayName("예약한 단일 메뉴에 대한 총 가격을 계산한다.")
+    @Test
+    void calculateSinglePrice() {
+        // given
+        SelectedMenu selectedMenu = SelectedMenu.createFrom("시저샐러드-10");
+
+        // when
+        int singlePrice = selectedMenu.calculateSinglePrice();
+
+        // then
+        assertThat(singlePrice).isEqualTo(Menu.CAESAR_SALAD.price() * 10);
     }
 }
