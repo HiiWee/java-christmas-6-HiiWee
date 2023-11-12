@@ -15,13 +15,14 @@ public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts gift
         );
     }
 
-    public void participateEvent(final EventType eventType, final int benefitAmount) {
+    public void addParticipatedEvent(final EventType eventType, final int benefitAmount) {
         if (benefitAmount > ZERO_WON) {
             benefitPrices.updateBenefit(eventType, benefitAmount);
         }
     }
 
-    public void addGift(final Menu giftMenu) {
+    public void addFreeGift(final Menu giftMenu) {
+        addParticipatedEvent(EventType.GIVING_EVENT, giftMenu.price());
         giftCounts.add(giftMenu);
     }
 
