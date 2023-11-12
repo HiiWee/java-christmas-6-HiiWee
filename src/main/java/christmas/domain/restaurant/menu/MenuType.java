@@ -25,13 +25,10 @@ public enum MenuType {
     }
 
     public static boolean isNotOnlyBeverage(final List<MenuType> menuTypes) {
-        if (menuTypes.size() == 1) {
-            return !menuTypes.contains(BEVERAGE);
-        }
-        return true;
+        return menuTypes.size() != 1 || !menuTypes.contains(BEVERAGE);
     }
 
-    private boolean contains(final Menu menu) {
+    public boolean contains(final Menu menu) {
         return menus.contains(menu);
     }
 }

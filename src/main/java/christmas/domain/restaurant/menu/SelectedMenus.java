@@ -18,12 +18,19 @@ public record SelectedMenus(List<SelectedMenu> menus) {
         return Collections.unmodifiableList(menus);
     }
 
-    public List<MenuType> extractMenuTypes() {
+    public List<MenuType> extractUniqueMenuTypes() {
         return menus.stream()
                 .map(SelectedMenu::menu)
                 .map(MenuType::findType)
                 .distinct()
                 .toList();
+    }
+
+    public int extractSameTypeCount(final MenuType compareType) {
+        return menus.stream()
+                .filter(selectedMenu -> selectedMenu.isTypeOf(compareType))
+                .mapToInt(SelectedMenu::count)
+                .sum();
     }
 
     public int calculateTotalPrice() {

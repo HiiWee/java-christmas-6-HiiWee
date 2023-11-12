@@ -53,7 +53,7 @@ class SelectedMenusTest {
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("초코케이크-1", "샴페인-10", "바비큐립-5"));
 
         // when
-        List<MenuType> menuTypes = selectedMenus.extractMenuTypes();
+        List<MenuType> menuTypes = selectedMenus.extractUniqueMenuTypes();
 
         // then
         assertThat(menuTypes).contains(MenuType.DESSERT, MenuType.BEVERAGE, MenuType.MAIN);

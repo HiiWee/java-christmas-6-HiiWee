@@ -44,7 +44,7 @@ class SelectedMenuTest {
         SelectedMenu selectedMenu = SelectedMenu.createFrom("시저샐러드-10");
 
         // when
-        boolean isSameMenuType = selectedMenu.isSameMenuType(MenuType.APPETIZER);
+        boolean isSameMenuType = selectedMenu.isTypeOf(MenuType.APPETIZER);
 
         // then
         assertThat(isSameMenuType).isTrue();
