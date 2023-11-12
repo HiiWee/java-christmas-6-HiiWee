@@ -1,12 +1,15 @@
 package christmas.domain.restaurant;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.SelectedMenus;
+import christmas.domain.restaurant.reservation.Reservation;
 import christmas.dto.ReservedResults;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -76,4 +79,29 @@ class WootecoRestaurantManagerTest {
         );
     }
 
+    @DisplayName("예약한 결과가 없다면 예외가 발생한다.")
+    @Test
+    void createReservationResults_exception_notFoundReservation() {
+        // given & when & then
+        assertThatIllegalArgumentException().isThrownBy(() -> manager.createReservationResults());
+    }
+
+    @DisplayName("선택한 메뉴와 날짜가 있다면 예약 정보가 업데이트 된다.")
+    @Test
+    void updateReservation() {
+        // given
+        manager.addSelectedDate("10");
+        manager.addSelectedMenus(List.of("해산물파스타-2", "타파스-10"));
+
+        // when
+        Optional<Reservation> beforeUpdate = repository.findReservation();
+        manager.updateReservation();
+        Optional<Reservation> afterUpdate = repository.findReservation();
+
+        // then
+        assertAll(
+                () -> assertThat(beforeUpdate.isEmpty()).isTrue(),
+                () -> assertThat(afterUpdate.isPresent()).isTrue()
+        );
+    }
 }
