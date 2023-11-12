@@ -1,15 +1,13 @@
 package christmas.domain.restaurant.date;
 
 import christmas.validator.domain.exception.DomainExceptionMessage;
-import java.util.List;
 
-public record SelectedDate(int date, List<DateType> dateTypes) {
+public record SelectedDate(int date) {
 
     public static SelectedDate createFrom(final String inputDate) {
         validate(inputDate);
         int date = Integer.parseInt(inputDate);
-        List<DateType> dateTypes = DateType.findWeekTypes(date);
-        return new SelectedDate(date, dateTypes);
+        return new SelectedDate(date);
     }
 
     private static void validate(final String inputDate) {
