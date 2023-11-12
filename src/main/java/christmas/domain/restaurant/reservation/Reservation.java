@@ -15,16 +15,12 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
         return reservationEventTypes.contains(eventType);
     }
 
-    public int extractMenuTypeCount(final MenuType targetMenuType) {
-        return selectedMenus.menus()
-                .stream()
-                .filter(selectedMenu -> selectedMenu.isSameMenuType(targetMenuType))
-                .mapToInt(SelectedMenu::count)
-                .sum();
+    public int countSameMenuType(final MenuType targetMenuType) {
+        return selectedMenus.extractSameTypeCount(targetMenuType);
     }
 
-    public boolean hasHigherOrSamePrice(final int compareAmount) {
-        return selectedMenus.calculateTotalPrice() >= compareAmount;
+    public List<MenuType> getUniqueMenuTypes() {
+        return selectedMenus.extractUniqueMenuTypes();
     }
 
     public List<SelectedMenu> getSelectedMenus() {
@@ -39,8 +35,8 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
         return selectedDate.date();
     }
 
-    public List<MenuType> getMenuTypes() {
-        return selectedMenus.extractMenuTypes();
+    public boolean hasHigherOrSamePrice(final int compareAmount) {
+        return getTotalPrice() >= compareAmount;
     }
 
     private List<EventType> findEventTypes() {

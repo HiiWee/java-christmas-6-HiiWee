@@ -12,7 +12,7 @@ public class WeekdayDiscountEvent implements DiscountEvent {
     @Override
     public void participateEvent(final EventParticipationHistory history, final Reservation reservation) {
         if (reservation.containsEventType(EventType.WEEKDAY_EVENT)) {
-            int dessertMenuCount = reservation.extractMenuTypeCount(MenuType.DESSERT);
+            int dessertMenuCount = reservation.countSameMenuType(MenuType.DESSERT);
             history.participateEvent(EventType.WEEKDAY_EVENT, DISCOUNT_INCREMENT * dessertMenuCount);
         }
     }

@@ -8,11 +8,9 @@ import java.util.List;
 public interface Event {
 
     static boolean canJoinAnyEvent(final Reservation reservation) {
-        List<MenuType> menuTypes = reservation.getMenuTypes();
+        List<MenuType> menuTypes = reservation.getUniqueMenuTypes();
         int totalPrice = reservation.getTotalPrice();
-
-        // TODO 이벤트 참여 조건 분리
-        return MenuType.isNotOnlyBeverage(menuTypes) && totalPrice >= 10_000;
+        return MenuType.isNotOnlyBeverage(menuTypes) && EventCondition.isMoreThanMinPrice(totalPrice);
     }
 
     void participateEvent(final EventParticipationHistory history, final Reservation reservation);
