@@ -11,7 +11,7 @@ public class SpecialDiscountEvent implements DiscountEvent {
     @Override
     public void participateEvent(final EventJoinHistory history, final Reservation reservation) {
         if (reservation.containsEventType(EventType.SPECIAL_EVENT)) {
-            history.participateEvent(EventType.SPECIAL_EVENT, DISCOUNT_INCREMENT);
+            history.addParticipatedEvent(EventType.SPECIAL_EVENT, DISCOUNT_INCREMENT);
         }
     }
 }

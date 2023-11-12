@@ -15,7 +15,7 @@ public class ChristmasDiscountEvent implements DiscountEvent {
     public void participateEvent(final EventJoinHistory history, final Reservation reservation) {
         if (reservation.containsEventType(EventType.CHRISTMAS_EVENT)) {
             int date = reservation.getReservedDate();
-            history.participateEvent(
+            history.addParticipatedEvent(
                     EventType.CHRISTMAS_EVENT,
                     DEFAULT_DISCOUNT_AMOUNT + (date - START_DATE) * DISCOUNT_INCREMENT
             );

@@ -78,7 +78,7 @@ class WootecoEventManagerTest {
     void createBenefitDetails() {
         // given
         EventJoinHistory history = EventJoinHistory.getInstance();
-        history.participateEvent(EventType.WEEKEND_EVENT, 555555);
+        history.addParticipatedEvent(EventType.WEEKEND_EVENT, 555555);
         eventJoinHistoryRepository.saveEventHistory(history);
 
         // when
@@ -96,7 +96,7 @@ class WootecoEventManagerTest {
         int eventBenefit = 50_000;
         int menuPrice = 145_000;
         EventJoinHistory history = EventJoinHistory.getInstance();
-        history.participateEvent(EventType.WEEKEND_EVENT, eventBenefit);
+        history.addParticipatedEvent(EventType.WEEKEND_EVENT, eventBenefit);
         Reservation reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("해산물파스타-2", "레드와인-1", "초코케이크-1")),
                 SelectedDate.createFrom("24")
@@ -116,7 +116,7 @@ class WootecoEventManagerTest {
     void selectEventBadge() {
         // given
         EventJoinHistory history = EventJoinHistory.getInstance();
-        history.participateEvent(EventType.WEEKEND_EVENT, 20_000);
+        history.addParticipatedEvent(EventType.WEEKEND_EVENT, 20_000);
 
         // when
         eventJoinHistoryRepository.saveEventHistory(history);
