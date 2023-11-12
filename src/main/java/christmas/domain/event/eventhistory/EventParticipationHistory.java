@@ -6,6 +6,8 @@ import java.util.EnumMap;
 
 public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {
 
+    private static final int ZERO_WON = 0;
+
     public static EventParticipationHistory getInstance() {
         return new EventParticipationHistory(
                 new EventBenefitPrices(new EnumMap<>(EventType.class)),
@@ -14,7 +16,9 @@ public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventG
     }
 
     public void participateEvent(final EventType eventType, final int benefitAmount) {
-        benefitPrices.updateBenefit(eventType, benefitAmount);
+        if (benefitAmount > ZERO_WON) {
+            benefitPrices.updateBenefit(eventType, benefitAmount);
+        }
     }
 
     public void addGift(final Menu giftMenu) {

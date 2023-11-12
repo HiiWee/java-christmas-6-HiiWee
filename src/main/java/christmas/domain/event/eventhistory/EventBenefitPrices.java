@@ -3,6 +3,8 @@ package christmas.domain.event.eventhistory;
 import christmas.domain.event.EventType;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public record EventBenefitPrices(Map<EventType, Integer> events) {
 
@@ -22,5 +24,14 @@ public record EventBenefitPrices(Map<EventType, Integer> events) {
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public Map<String, Integer> convertBenefitPricesWithName() {
+        return events.entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getEventName(),
+                        Entry::getValue
+                ));
     }
 }
