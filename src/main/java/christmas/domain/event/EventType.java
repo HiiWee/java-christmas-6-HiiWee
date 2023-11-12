@@ -4,7 +4,7 @@ import christmas.domain.event.discount.ChristmasDiscountEvent;
 import christmas.domain.event.discount.SpecialDiscountEvent;
 import christmas.domain.event.discount.WeekdayDiscountEvent;
 import christmas.domain.event.discount.WeekendDiscountEvent;
-import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.event.gift.ChampagneGiftEvent;
 import christmas.domain.restaurant.date.DateType;
 import christmas.domain.restaurant.reservation.Reservation;
@@ -46,7 +46,7 @@ public enum EventType {
                 .toList();
     }
 
-    public static void joinEvents(final Reservation reservation, final EventParticipationHistory history) {
+    public static void joinEvents(final Reservation reservation, final EventJoinHistory history) {
         if (Event.canJoinAnyEvent(reservation)) {
             List<Event> events = getEvents();
             events.forEach(event -> event.participateEvent(history, reservation));

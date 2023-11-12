@@ -4,12 +4,12 @@ import christmas.domain.event.EventType;
 import christmas.domain.restaurant.menu.Menu;
 import java.util.EnumMap;
 
-public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {
+public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {
 
     private static final int ZERO_WON = 0;
 
-    public static EventParticipationHistory getInstance() {
-        return new EventParticipationHistory(
+    public static EventJoinHistory getInstance() {
+        return new EventJoinHistory(
                 new EventBenefitPrices(new EnumMap<>(EventType.class)),
                 new EventGifts(new EnumMap<>(Menu.class))
         );

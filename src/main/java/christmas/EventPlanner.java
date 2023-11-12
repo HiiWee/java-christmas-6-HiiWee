@@ -41,7 +41,7 @@ public class EventPlanner {
     }
 
     private void applyEventBenefit() {
-        eventManager.applyAllEvents(restaurantManager);
+        eventManager.applyAllEvents(restaurantManager::findReservationObject);
     }
 
     private void printReservationResults() {
@@ -55,7 +55,7 @@ public class EventPlanner {
     }
 
     private void printPaymentAmount() {
-        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager);
+        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager::findReservationObject);
         outputView.printPaymentAmount(paymentAmount);
     }
 

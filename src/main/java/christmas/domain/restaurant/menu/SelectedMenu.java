@@ -11,11 +11,10 @@ public record SelectedMenu(Menu menu, int count) {
     // TODO 11.12작성: 좀 더 깔끔하게 로직을 만들 수 없을까?
     public static SelectedMenu createFrom(final String inputMenu) {
         String[] splitMenus = inputMenu.split(DELIMITER);
-        String menuName = splitMenus[NAME_INDEX];
         int count = Integer.parseInt(splitMenus[COUNT_INDEX]);
 
         validateMenuCount(count);
-        Menu menu = Menu.find(menuName);
+        Menu menu = Menu.find(splitMenus[NAME_INDEX]);
         return new SelectedMenu(menu, count);
     }
 

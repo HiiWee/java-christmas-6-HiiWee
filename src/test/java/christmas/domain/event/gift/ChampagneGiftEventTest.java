@@ -3,7 +3,7 @@ package christmas.domain.event.gift;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.event.EventType;
-import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.menu.SelectedMenus;
@@ -24,7 +24,7 @@ class ChampagneGiftEventTest {
         );
 
         // when
-        EventParticipationHistory history = EventParticipationHistory.getInstance();
+        EventJoinHistory history = EventJoinHistory.getInstance();
         GiftEvent champagneGiftEvent = new ChampagneGiftEvent();
         champagneGiftEvent.participateEvent(history, reservation);
         int actualDiscountPrice = history.benefitPrices().events().get(EventType.GIVING_EVENT);

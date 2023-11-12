@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.menu.MenuType;
 import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
@@ -13,5 +13,5 @@ public interface Event {
         return MenuType.isNotOnlyBeverage(menuTypes) && EventCondition.canParticipatePrice(totalPrice);
     }
 
-    void participateEvent(final EventParticipationHistory history, final Reservation reservation);
+    void participateEvent(final EventJoinHistory history, final Reservation reservation);
 }

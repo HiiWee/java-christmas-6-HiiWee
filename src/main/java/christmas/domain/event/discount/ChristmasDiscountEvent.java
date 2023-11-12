@@ -1,7 +1,7 @@
 package christmas.domain.event.discount;
 
 import christmas.domain.event.EventType;
-import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
 
 public class ChristmasDiscountEvent implements DiscountEvent {
@@ -12,7 +12,7 @@ public class ChristmasDiscountEvent implements DiscountEvent {
     private static final int DISCOUNT_INCREMENT = 100;
 
     @Override
-    public void participateEvent(final EventParticipationHistory history, final Reservation reservation) {
+    public void participateEvent(final EventJoinHistory history, final Reservation reservation) {
         if (reservation.containsEventType(EventType.CHRISTMAS_EVENT)) {
             int date = reservation.getReservedDate();
             history.participateEvent(
