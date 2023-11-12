@@ -1,7 +1,7 @@
 package christmas;
 
-import christmas.domain.BookingRepository;
-import christmas.domain.WootecoRestaurantManager;
+import christmas.domain.restaurant.BookingRepository;
+import christmas.domain.restaurant.WootecoRestaurantManager;
 import christmas.domain.event.EventRepository;
 import christmas.domain.event.WootecoEventManager;
 import christmas.view.InputView;

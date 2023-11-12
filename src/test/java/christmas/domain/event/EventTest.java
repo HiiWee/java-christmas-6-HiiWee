@@ -1,8 +1,8 @@
 package christmas.domain.event;
 
-import christmas.domain.date.SelectedDate;
-import christmas.domain.menu.SelectedMenus;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.restaurant.date.SelectedDate;
+import christmas.domain.restaurant.menu.SelectedMenus;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

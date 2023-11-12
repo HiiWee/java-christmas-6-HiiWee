@@ -1,6 +1,6 @@
 package christmas.dto;
 
-import christmas.domain.menu.SelectedMenu;
+import christmas.domain.restaurant.menu.SelectedMenu;
 
 public record ReservedMenu(String name, int count) {
 

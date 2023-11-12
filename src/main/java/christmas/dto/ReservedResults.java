@@ -1,6 +1,6 @@
 package christmas.dto;
 
-import christmas.domain.reservation.Reservation;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
 import java.util.stream.Collectors;
 

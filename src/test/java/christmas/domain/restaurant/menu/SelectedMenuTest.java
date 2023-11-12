@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.restaurant.menu;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.assertThatNoException;

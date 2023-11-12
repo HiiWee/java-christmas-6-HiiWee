@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.event.history.EventParticipationHistory;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;

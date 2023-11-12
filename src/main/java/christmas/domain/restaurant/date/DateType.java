@@ -1,4 +1,4 @@
-package christmas.domain.date;
+package christmas.domain.restaurant.date;
 
 import java.util.Arrays;
 import java.util.Collections;

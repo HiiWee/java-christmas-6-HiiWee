@@ -1,4 +1,4 @@
-package christmas.domain.event.history;
+package christmas.domain.event.eventhistory;
 
 import christmas.domain.event.EventType;
 import java.util.Collections;

@@ -1,8 +1,8 @@
-package christmas.domain;
+package christmas.domain.restaurant;
 
-import christmas.domain.date.SelectedDate;
-import christmas.domain.menu.SelectedMenus;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.restaurant.date.SelectedDate;
+import christmas.domain.restaurant.menu.SelectedMenus;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;

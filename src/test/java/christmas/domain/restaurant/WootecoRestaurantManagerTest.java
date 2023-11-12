@@ -1,10 +1,10 @@
-package christmas.domain;
+package christmas.domain.restaurant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import christmas.domain.date.SelectedDate;
-import christmas.domain.menu.SelectedMenus;
+import christmas.domain.restaurant.date.SelectedDate;
+import christmas.domain.restaurant.menu.SelectedMenus;
 import christmas.dto.ReservedResults;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,8 +1,8 @@
 package christmas.domain.event;
 
-import christmas.domain.event.history.EventParticipationHistory;
-import christmas.domain.menu.MenuType;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.restaurant.menu.MenuType;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
 
 public interface Event {

@@ -1,8 +1,8 @@
 package christmas.domain.event;
 
-import christmas.domain.WootecoRestaurantManager;
-import christmas.domain.event.history.EventParticipationHistory;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.restaurant.WootecoRestaurantManager;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.restaurant.reservation.Reservation;
 import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;
 import christmas.dto.PaymentAmountResult;

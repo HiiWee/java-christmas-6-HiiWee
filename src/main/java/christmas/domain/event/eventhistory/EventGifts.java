@@ -1,6 +1,6 @@
-package christmas.domain.event.history;
+package christmas.domain.event.eventhistory;
 
-import christmas.domain.menu.Menu;
+import christmas.domain.restaurant.menu.Menu;
 import java.util.Collections;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package christmas.domain.date;
+package christmas.domain.restaurant.date;
 
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.List;

@@ -1,7 +1,7 @@
 package christmas.domain.event.gift;
 
 import christmas.domain.event.Event;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.restaurant.reservation.Reservation;
 
 public interface GiftEvent extends Event {
 

@@ -1,7 +1,7 @@
-package christmas.domain.event.history;
+package christmas.domain.event.eventhistory;
 
 import christmas.domain.event.EventType;
-import christmas.domain.menu.Menu;
+import christmas.domain.restaurant.menu.Menu;
 import java.util.EnumMap;
 
 public record EventParticipationHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {

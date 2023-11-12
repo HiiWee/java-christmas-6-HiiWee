@@ -1,6 +1,6 @@
 package christmas.dto;
 
-import christmas.domain.event.history.EventBenefitPrices;
+import christmas.domain.event.eventhistory.EventBenefitPrices;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
@@ -15,6 +15,7 @@ public record BenefitPriceResults(Map<String, Integer> benefitPrices) {
                 benefitPrices.events()
                         .entrySet()
                         .stream()
+                        .filter(entry -> entry.getValue() > 0)
                         .collect(Collectors.toMap(
                                 entry -> entry.getKey().getEventName(),
                                 Entry::getValue
@@ -30,14 +31,14 @@ public record BenefitPriceResults(Map<String, Integer> benefitPrices) {
                 .collect(Collectors.joining(DELIMITER));
     }
 
-    private static boolean hasBenefitPrice(final int currentEventBenefit) {
-        return currentEventBenefit > 0;
-    }
-
     public int getTotalBenefit() {
         return benefitPrices.values()
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    private static boolean hasBenefitPrice(final int currentEventBenefit) {
+        return currentEventBenefit > 0;
     }
 }

@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.restaurant.menu;
 
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.Arrays;

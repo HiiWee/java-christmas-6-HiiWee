@@ -2,12 +2,12 @@ package christmas.domain.event.gift;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.date.SelectedDate;
 import christmas.domain.event.EventType;
-import christmas.domain.event.history.EventParticipationHistory;
-import christmas.domain.menu.Menu;
-import christmas.domain.menu.SelectedMenus;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.restaurant.date.SelectedDate;
+import christmas.domain.restaurant.menu.Menu;
+import christmas.domain.restaurant.menu.SelectedMenus;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

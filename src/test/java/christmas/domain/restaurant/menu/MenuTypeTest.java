@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.restaurant.menu;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;

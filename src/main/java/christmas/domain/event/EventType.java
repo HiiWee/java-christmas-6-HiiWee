@@ -1,13 +1,13 @@
 package christmas.domain.event;
 
-import christmas.domain.date.DateType;
+import christmas.domain.restaurant.date.DateType;
 import christmas.domain.event.discount.ChristmasDiscountEvent;
 import christmas.domain.event.discount.SpecialDiscountEvent;
 import christmas.domain.event.discount.WeekdayDiscountEvent;
 import christmas.domain.event.discount.WeekendDiscountEvent;
 import christmas.domain.event.gift.ChampagneGiftEvent;
-import christmas.domain.event.history.EventParticipationHistory;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.restaurant.reservation.Reservation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

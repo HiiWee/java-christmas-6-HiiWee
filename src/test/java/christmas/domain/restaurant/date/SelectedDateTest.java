@@ -1,4 +1,4 @@
-package christmas.domain.date;
+package christmas.domain.restaurant.date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;

@@ -1,4 +1,4 @@
-package christmas.domain.date;
+package christmas.domain.restaurant.date;
 
 public enum DateCondition {
 

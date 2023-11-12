@@ -1,6 +1,6 @@
 package christmas;
 
-import christmas.domain.WootecoRestaurantManager;
+import christmas.domain.restaurant.WootecoRestaurantManager;
 import christmas.domain.event.WootecoEventManager;
 import christmas.dto.BadgeResult;
 import christmas.dto.BenefitDetails;

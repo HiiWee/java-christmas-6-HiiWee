@@ -19,9 +19,4 @@ public class InputView {
         System.out.println(INPUT_MENUS_MESSAGE);
         return InputReader.readInputs(DELIMITER);
     }
-
-//    public List<String> inputMenus() {
-//
-//    }
-
 }

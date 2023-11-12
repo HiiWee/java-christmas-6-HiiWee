@@ -1,8 +1,9 @@
-package christmas.domain.menu;
+package christmas.domain.restaurant.menu;
 
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.Arrays;
 
+// TODO 레스토링 패키지 리팩토링
 public enum Menu {
 
     MUSHROOM_SOUP("양송이수프", 6_000),

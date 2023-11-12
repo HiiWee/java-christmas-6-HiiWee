@@ -1,8 +1,8 @@
 package christmas.domain.event.discount;
 
 import christmas.domain.event.EventType;
-import christmas.domain.event.history.EventParticipationHistory;
-import christmas.domain.reservation.Reservation;
+import christmas.domain.event.eventhistory.EventParticipationHistory;
+import christmas.domain.restaurant.reservation.Reservation;
 
 public class ChristmasDiscountEvent implements DiscountEvent {
 
