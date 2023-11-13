@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.badge;
 
 import christmas.domain.event.EventBadge;
 

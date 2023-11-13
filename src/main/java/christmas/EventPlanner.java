@@ -2,10 +2,10 @@ package christmas;
 
 import christmas.domain.event.WootecoEventManager;
 import christmas.domain.restaurant.WootecoRestaurantManager;
-import christmas.dto.BadgeResult;
-import christmas.dto.BenefitDetails;
-import christmas.dto.PaymentAmountResult;
-import christmas.dto.ReservedResults;
+import christmas.dto.badge.BadgeResult;
+import christmas.dto.benefitdetail.BenefitDetails;
+import christmas.dto.payment.PaymentAmountResult;
+import christmas.dto.reservation.ReservedResults;
 import christmas.exception.ExceptionResolver;
 import christmas.view.InputView;
 import christmas.view.OutputView;

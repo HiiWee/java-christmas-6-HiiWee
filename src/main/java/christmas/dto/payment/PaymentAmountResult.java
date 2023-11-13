@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.payment;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
@@ -9,7 +9,7 @@ public record PaymentAmountResult(int paymentAmount) {
 
     public static PaymentAmountResult createFrom(final EventJoinHistory history, final Reservation reservation) {
         int totalPrice = reservation.getTotalPrice();
-        int totalBenefit = history.calculateTotalBenefit();
+        int totalBenefit = history.calculateDiscountBenefit();
         return new PaymentAmountResult(totalPrice - totalBenefit);
     }
 

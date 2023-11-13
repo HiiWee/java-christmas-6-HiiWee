@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.SelectedMenus;
 import christmas.domain.restaurant.reservation.Reservation;
-import christmas.dto.ReservedResults;
+import christmas.dto.reservation.ReservedResults;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;

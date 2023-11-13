@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.benefitdetail;
 
 import christmas.domain.event.eventhistory.EventBenefitPrices;
 import java.util.Map;

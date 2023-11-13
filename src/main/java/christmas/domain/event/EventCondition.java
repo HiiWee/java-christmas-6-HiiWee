@@ -2,7 +2,7 @@ package christmas.domain.event;
 
 public enum EventCondition {
 
-    MIN_PARTICIPATION_RESERVED_PRICE(10_000);
+    MIN_EVENT_JOIN_PRICE(10_000);
 
     private final int value;
 
@@ -11,6 +11,6 @@ public enum EventCondition {
     }
 
     public static boolean canParticipatePrice(final int price) {
-        return MIN_PARTICIPATION_RESERVED_PRICE.value <= price;
+        return MIN_EVENT_JOIN_PRICE.value <= price;
     }
 }

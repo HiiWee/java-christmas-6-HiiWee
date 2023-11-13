@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.reservation;
 
 import christmas.domain.restaurant.menu.SelectedMenu;
 

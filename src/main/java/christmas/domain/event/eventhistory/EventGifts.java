@@ -3,6 +3,8 @@ package christmas.domain.event.eventhistory;
 import christmas.domain.restaurant.menu.Menu;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public record EventGifts(Map<Menu, Integer> giftCounts) {
 
@@ -15,10 +17,9 @@ public record EventGifts(Map<Menu, Integer> giftCounts) {
         giftCounts.put(menu, giftCounts.getOrDefault(menu, 0) + 1);
     }
 
-    public int extractGiftBenefit() {
+    public Map<String, Integer> convertMenuToName() {
         return giftCounts.entrySet()
                 .stream()
-                .mapToInt(entry -> entry.getKey().price() * entry.getValue())
-                .sum();
+                .collect(Collectors.toMap(entry -> entry.getKey().getName(), Entry::getValue));
     }
 }

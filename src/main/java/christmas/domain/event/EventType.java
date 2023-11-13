@@ -40,6 +40,10 @@ public enum EventType {
         return eventName;
     }
 
+    public static boolean isNotGivingEvent(final EventType eventType) {
+        return eventType != GIVING_EVENT;
+    }
+
     public static List<EventType> findEventTypesFrom(final List<DateType> dateTypes) {
         return dateTypes.stream()
                 .map(EVENT_TYPE_CACHE::get)

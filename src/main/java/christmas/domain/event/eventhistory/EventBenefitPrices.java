@@ -4,6 +4,7 @@ import christmas.domain.event.EventType;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public record EventBenefitPrices(Map<EventType, Integer> events) {
@@ -23,6 +24,14 @@ public record EventBenefitPrices(Map<EventType, Integer> events) {
         return events.values()
                 .stream()
                 .mapToInt(Integer::intValue)
+                .sum();
+    }
+
+    public int extractDiscountBenefit() {
+        return events.entrySet()
+                .stream()
+                .filter(entry -> EventType.isNotGivingEvent(entry.getKey()))
+                .mapToInt(Entry::getValue)
                 .sum();
     }
 

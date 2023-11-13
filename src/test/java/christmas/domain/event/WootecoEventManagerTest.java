@@ -8,9 +8,9 @@ import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.menu.SelectedMenus;
 import christmas.domain.restaurant.reservation.Reservation;
-import christmas.dto.BadgeResult;
-import christmas.dto.BenefitDetails;
-import christmas.dto.PaymentAmountResult;
+import christmas.dto.badge.BadgeResult;
+import christmas.dto.benefitdetail.BenefitDetails;
+import christmas.dto.payment.PaymentAmountResult;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,6 +77,7 @@ class WootecoEventManagerTest {
         int menuPrice = 145_000;
         EventJoinHistory history = EventJoinHistory.getInstance();
         history.addParticipatedEvent(EventType.WEEKEND_EVENT, eventBenefit);
+        history.addFreeGift(Menu.CHAMPAGNE);
         Reservation reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("해산물파스타-2", "레드와인-1", "초코케이크-1")),
                 SelectedDate.createFrom("24")

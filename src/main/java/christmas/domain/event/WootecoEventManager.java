@@ -2,9 +2,9 @@ package christmas.domain.event;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
-import christmas.dto.BadgeResult;
-import christmas.dto.BenefitDetails;
-import christmas.dto.PaymentAmountResult;
+import christmas.dto.badge.BadgeResult;
+import christmas.dto.benefitdetail.BenefitDetails;
+import christmas.dto.payment.PaymentAmountResult;
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.function.Supplier;
 
