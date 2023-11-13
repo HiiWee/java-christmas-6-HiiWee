@@ -22,9 +22,12 @@ public enum EventType {
     SPECIAL_EVENT("특별 할인", DateType.SPECIAL, new SpecialDiscountEvent()),
     GIVING_EVENT("증정 이벤트", DateType.NONE, new ChampagneGiftEvent());
 
-    private static final Map<DateType, EventType> EVENT_TYPE_CACHE = Arrays.stream(values()).collect(
+    private static final Map<DateType, EventType> EVENT_TYPE_GROUPING_BY_DATE = Arrays.stream(values()).collect(
             Collectors.toMap(eventType -> eventType.dateType, Function.identity())
     );
+    private static final List<Event> ALL_EVENTS = Arrays.stream(values())
+            .map(eventType -> eventType.event)
+            .toList();
 
     private final String eventName;
     private final DateType dateType;
@@ -46,20 +49,13 @@ public enum EventType {
 
     public static List<EventType> findEventTypesFrom(final List<DateType> dateTypes) {
         return dateTypes.stream()
-                .map(EVENT_TYPE_CACHE::get)
+                .map(EVENT_TYPE_GROUPING_BY_DATE::get)
                 .toList();
     }
 
     public static void joinEvents(final Reservation reservation, final EventJoinHistory history) {
         if (Event.canJoinAnyEvent(reservation)) {
-            List<Event> events = getEvents();
-            events.forEach(event -> event.participateEvent(history, reservation));
+            ALL_EVENTS.forEach(event -> event.participateEvent(history, reservation));
         }
-    }
-
-    private static List<Event> getEvents() {
-        return Arrays.stream(values())
-                .map(eventType -> eventType.event)
-                .toList();
     }
 }

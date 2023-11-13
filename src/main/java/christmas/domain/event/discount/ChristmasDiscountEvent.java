@@ -6,7 +6,6 @@ import christmas.domain.restaurant.reservation.Reservation;
 
 public class ChristmasDiscountEvent implements DiscountEvent {
 
-    // TODO 크리스마스 조건 분리
     private static final int START_DATE = 1;
     private static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
     private static final int DISCOUNT_INCREMENT = 100;
