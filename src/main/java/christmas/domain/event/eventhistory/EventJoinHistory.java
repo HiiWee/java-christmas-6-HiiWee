@@ -4,7 +4,7 @@ import christmas.domain.event.EventType;
 import christmas.domain.restaurant.menu.Menu;
 import java.util.EnumMap;
 
-public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts giftCounts) {
+public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts eventGifts) {
 
     private static final int ZERO_WON = 0;
 
@@ -22,11 +22,10 @@ public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts gift
     }
 
     public void addFreeGift(final Menu giftMenu) {
-        addParticipatedEvent(EventType.GIVING_EVENT, giftMenu.price());
-        giftCounts.add(giftMenu);
+        eventGifts.add(giftMenu);
     }
 
     public int calculateTotalBenefit() {
-        return benefitPrices.extractTotalBenefit();
+        return benefitPrices.extractTotalBenefit() + eventGifts.extractGiftBenefit();
     }
 }

@@ -14,4 +14,11 @@ public record EventGifts(Map<Menu, Integer> giftCounts) {
     public void add(final Menu menu) {
         giftCounts.put(menu, giftCounts.getOrDefault(menu, 0) + 1);
     }
+
+    public int extractGiftBenefit() {
+        return giftCounts.entrySet()
+                .stream()
+                .mapToInt(entry -> entry.getKey().price() * entry.getValue())
+                .sum();
+    }
 }
