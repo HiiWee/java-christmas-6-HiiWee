@@ -1,13 +1,13 @@
 package christmas.view;
 
-import christmas.dto.BadgeResult;
-import christmas.dto.BenefitDetails;
-import christmas.dto.PaymentAmountResult;
-import christmas.dto.ReservedResults;
+import christmas.dto.badge.BadgeResult;
+import christmas.dto.benefitdetail.BenefitDetails;
+import christmas.dto.payment.PaymentAmountResult;
+import christmas.dto.reservation.ReservedResults;
 
 public class OutputView {
 
-    private static final String EVENT_BENEFIT_INFORMATION_MESSAGE = "12월 26일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String EVENT_BENEFIT_INFORMATION_FORMAT = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String RESERVED_MENU_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_PRICE_WITHOUT_BENEFIT_MESSAGE = "<할인 전 총주문 금액>";
     private static final String GIFT_MENU_MESSAGE = "<증정 메뉴>";
@@ -17,7 +17,7 @@ public class OutputView {
     private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
 
     public void printReservationResults(final ReservedResults results) {
-        System.out.println(EVENT_BENEFIT_INFORMATION_MESSAGE);
+        System.out.println(String.format(EVENT_BENEFIT_INFORMATION_FORMAT, results.date()));
         printReservedMenu(results);
         printTotalPrice(results);
     }
