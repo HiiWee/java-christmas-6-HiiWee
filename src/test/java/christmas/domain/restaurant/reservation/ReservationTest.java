@@ -58,16 +58,6 @@ class ReservationTest {
         assertThat(count).isEqualTo(10);
     }
 
-    @DisplayName("예약한 메뉴의 모든 타입을 중복없이 가져온다.")
-    @Test
-    void getUniqueMenuTypes() {
-        // given & when
-        List<MenuType> uniqueMenuTypes = reservation.getUniqueMenuTypes();
-
-        // then
-        assertThat(uniqueMenuTypes).contains(MenuType.MAIN, MenuType.DESSERT, MenuType.BEVERAGE);
-    }
-
     @DisplayName("예약한 메뉴들을 받아볼 수 있다.")
     @Test
     void getSelectedMenus() {

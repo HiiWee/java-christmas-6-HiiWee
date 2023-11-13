@@ -9,7 +9,8 @@ public enum DomainExceptionMessage {
     NOT_FOUND_SELECTED_DATE("[ERROR] 선택한 날짜를 찾을 수 없습니다."),
     NOT_FOUND_SELECTED_MENUS("[ERROR] 선택한 메뉴들을 찾을 수 없습니다."),
     NOT_FOUND_RESERVATION("[ERROR] 선택한 예약을 찾을 수 없습니다."),
-    NOT_FOUND_EVENT_HISTORY("[ERROR] 이벤트 참여 내역을 찾을 수 없습니다.");
+    NOT_FOUND_EVENT_HISTORY("[ERROR] 이벤트 참여 내역을 찾을 수 없습니다."),
+    CAN_NOT_RESERVE_ONLY_BEVERAGE("[ERROR] 음료만 예약할 수 없습니다.");
 
     private final String message;
 

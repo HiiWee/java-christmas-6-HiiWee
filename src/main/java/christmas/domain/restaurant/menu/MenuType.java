@@ -24,8 +24,9 @@ public enum MenuType {
                 .orElseThrow(DomainExceptionMessage.NOT_FOUND_MENU_TYPE::create);
     }
 
-    public static boolean isNotOnlyBeverage(final List<MenuType> menuTypes) {
-        return menuTypes.size() != 1 || !menuTypes.contains(BEVERAGE);
+    public static boolean isInBeverage(final String menuName) {
+        Menu menu = Menu.find(menuName);
+        return BEVERAGE.contains(menu);
     }
 
     public boolean contains(final Menu menu) {

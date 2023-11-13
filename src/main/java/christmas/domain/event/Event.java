@@ -1,16 +1,13 @@
 package christmas.domain.event;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
-import christmas.domain.restaurant.menu.MenuType;
 import christmas.domain.restaurant.reservation.Reservation;
-import java.util.List;
 
 public interface Event {
 
     static boolean canJoinAnyEvent(final Reservation reservation) {
-        List<MenuType> menuTypes = reservation.getUniqueMenuTypes();
         int totalPrice = reservation.getTotalPrice();
-        return MenuType.isNotOnlyBeverage(menuTypes) && EventCondition.canParticipatePrice(totalPrice);
+        return EventCondition.canParticipatePrice(totalPrice);
     }
 
     void participateEvent(final EventJoinHistory history, final Reservation reservation);

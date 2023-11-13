@@ -1,6 +1,7 @@
 package christmas.validator.domain;
 
 import christmas.domain.restaurant.menu.MenuCondition;
+import christmas.domain.restaurant.menu.MenuType;
 import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -16,11 +17,26 @@ public class SelectedMenusValidator {
     }
 
     public static void validateMenus(final List<String> inputMenus) {
+        validateFormatAndDuplicates(inputMenus);
+        validateLimitMenuCount(inputMenus);
+        validateOnlyBeverage(inputMenus);
+    }
+
+    private static void validateFormatAndDuplicates(final List<String> inputMenus) {
         if (isInvalidFormat(inputMenus) || isDuplicates(inputMenus)) {
             throw DomainExceptionMessage.INVALID_ORDER.create();
         }
+    }
+
+    private static void validateLimitMenuCount(final List<String> inputMenus) {
         if (hasTooManyMenu(inputMenus)) {
             throw DomainExceptionMessage.TOO_MANY_RESERVATION_MENU.create();
+        }
+    }
+
+    private static void validateOnlyBeverage(final List<String> inputMenus) {
+        if (isAllBeverage(inputMenus)) {
+            throw DomainExceptionMessage.CAN_NOT_RESERVE_ONLY_BEVERAGE.create();
         }
     }
 
@@ -40,5 +56,11 @@ public class SelectedMenusValidator {
         return MenuCondition.hasTooManyMenu(inputMenus.stream()
                 .mapToInt(inputMenu -> Integer.parseInt(inputMenu.split(DELIMITER)[COUNT_INDEX]))
                 .sum());
+    }
+
+    private static boolean isAllBeverage(final List<String> inputMenus) {
+        return inputMenus.stream()
+                .map(input -> input.split(DELIMITER)[NAME_INDEX])
+                .allMatch(MenuType::isInBeverage);
     }
 }

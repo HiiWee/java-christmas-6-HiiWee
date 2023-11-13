@@ -19,10 +19,6 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
         return selectedMenus.extractSameTypeCount(targetMenuType);
     }
 
-    public List<MenuType> getUniqueMenuTypes() {
-        return selectedMenus.extractUniqueMenuTypes();
-    }
-
     public List<SelectedMenu> getSelectedMenus() {
         return selectedMenus.menus();
     }
