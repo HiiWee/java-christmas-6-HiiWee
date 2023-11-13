@@ -2,11 +2,8 @@ package christmas.domain.event;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.BDDMockito.given;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
-import christmas.domain.restaurant.BookingRepository;
-import christmas.domain.restaurant.WootecoRestaurantManager;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.menu.SelectedMenus;
@@ -16,36 +13,21 @@ import christmas.dto.BenefitDetails;
 import christmas.dto.PaymentAmountResult;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 class WootecoEventManagerTest {
-
-    @InjectMocks
-    WootecoRestaurantManager restaurantManager;
-
-    @Mock
-    BookingRepository bookingRepository;
 
     WootecoEventManager eventManager;
 
     EventJoinHistoryRepository eventJoinHistoryRepository;
 
-    AutoCloseable autoCloseable;
-
     @BeforeEach
-    void setUp() throws Exception {
-        autoCloseable = MockitoAnnotations.openMocks(this);
+    void setUp() {
         eventJoinHistoryRepository = new EventJoinHistoryRepository();
         eventManager = new WootecoEventManager(eventJoinHistoryRepository);
-        autoCloseable.close();
     }
-
 
     @DisplayName("이벤트에 등록하면 이벤트에 대한 혜택 기록을 저장하고 뱃지를 받을 수 있다.")
     @Test
@@ -56,14 +38,12 @@ class WootecoEventManagerTest {
         SelectedDate selectedDate = SelectedDate.createFrom("25");
         Reservation reservation = new Reservation(selectedMenus, selectedDate);
 
-        given(bookingRepository.findReservation()).willReturn(Optional.of(reservation));
-
         // when
-        eventManager.applyAllEvents(restaurantManager::findReservationObject);
+        eventManager.applyAllEvents(() -> reservation);
         EventJoinHistory history = eventJoinHistoryRepository.findEventHistory().get();
         int benefitPrice = history.calculateTotalBenefit();
         EventBadge eventBadge = EventBadge.findBadge(benefitPrice);
-        Map<Menu, Integer> giftCounts = history.giftCounts().giftCounts();
+        Map<Menu, Integer> giftCounts = history.eventGifts().giftCounts();
 
         // then
         assertAll(
@@ -101,11 +81,10 @@ class WootecoEventManagerTest {
                 SelectedMenus.createFrom(List.of("해산물파스타-2", "레드와인-1", "초코케이크-1")),
                 SelectedDate.createFrom("24")
         );
-        given(bookingRepository.findReservation()).willReturn(Optional.of(reservation));
 
         // when
         eventJoinHistoryRepository.saveEventHistory(history);
-        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(restaurantManager::findReservationObject);
+        PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(() -> reservation);
 
         // then
         assertThat(paymentAmount.paymentAmount()).isEqualTo(menuPrice - eventBenefit);
