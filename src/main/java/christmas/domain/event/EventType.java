@@ -39,10 +39,6 @@ public enum EventType {
         this.event = event;
     }
 
-    public String getEventName() {
-        return eventName;
-    }
-
     public static boolean isNotGivingEvent(final EventType eventType) {
         return eventType != GIVING_EVENT;
     }
@@ -57,5 +53,9 @@ public enum EventType {
         if (Event.canJoinAnyEvent(reservation)) {
             ALL_EVENTS.forEach(event -> event.participateEvent(history, reservation));
         }
+    }
+
+    public String getEventName() {
+        return eventName;
     }
 }

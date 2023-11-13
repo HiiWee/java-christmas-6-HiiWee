@@ -60,6 +60,6 @@ class SelectedMenuTest {
         int singlePrice = selectedMenu.calculateSinglePrice();
 
         // then
-        assertThat(singlePrice).isEqualTo(Menu.CAESAR_SALAD.price() * 10);
+        assertThat(singlePrice).isEqualTo(Menu.CAESAR_SALAD.getPrice() * 10);
     }
 }

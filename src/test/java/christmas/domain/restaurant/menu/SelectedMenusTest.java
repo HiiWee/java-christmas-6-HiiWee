@@ -63,7 +63,8 @@ class SelectedMenusTest {
     @Test
     void calculateTotalPrice() {
         // given
-        int expectedTotalPrice = Menu.CHOCO_CAKE.price() + Menu.CHAMPAGNE.price() * 10 + Menu.BARBECUE_RIBS.price() * 5;
+        int expectedTotalPrice =
+                Menu.CHOCO_CAKE.getPrice() + Menu.CHAMPAGNE.getPrice() * 10 + Menu.BARBECUE_RIBS.getPrice() * 5;
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("초코케이크-1", "샴페인-10", "바비큐립-5"));
 
         // when

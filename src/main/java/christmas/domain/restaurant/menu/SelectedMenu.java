@@ -25,7 +25,7 @@ public record SelectedMenu(Menu menu, int count) {
     }
 
     public int calculateSinglePrice() {
-        return menu.price() * count;
+        return menu.getPrice() * count;
     }
 
     public String getName() {

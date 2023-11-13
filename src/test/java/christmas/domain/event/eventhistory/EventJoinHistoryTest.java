@@ -35,7 +35,7 @@ class EventJoinHistoryTest {
         int totalBenefit = history.calculateTotalBenefit();
 
         // then
-        assertThat(totalBenefit).isEqualTo(Menu.CHAMPAGNE.price());
+        assertThat(totalBenefit).isEqualTo(Menu.CHAMPAGNE.getPrice());
     }
 
 

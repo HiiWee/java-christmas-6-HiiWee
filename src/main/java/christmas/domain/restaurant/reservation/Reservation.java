@@ -23,16 +23,16 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
         return selectedMenus.menus();
     }
 
+    public boolean hasHigherOrSamePrice(final int compareAmount) {
+        return getTotalPrice() >= compareAmount;
+    }
+
     public int getTotalPrice() {
         return selectedMenus.calculateTotalPrice();
     }
 
     public int getReservedDate() {
         return selectedDate.date();
-    }
-
-    public boolean hasHigherOrSamePrice(final int compareAmount) {
-        return getTotalPrice() >= compareAmount;
     }
 
     private List<EventType> findEventTypes() {

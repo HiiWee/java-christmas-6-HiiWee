@@ -10,11 +10,6 @@ public record EventBenefitPrices(Map<EventType, Integer> events) {
 
     private static final int DEFAULT_VALUE = 0;
 
-    @Override
-    public Map<EventType, Integer> events() {
-        return Collections.unmodifiableMap(events);
-    }
-
     public void updateBenefit(final EventType eventType, final int benefitAmount) {
         events.put(eventType, events.getOrDefault(eventType, DEFAULT_VALUE) + benefitAmount);
     }
@@ -41,5 +36,10 @@ public record EventBenefitPrices(Map<EventType, Integer> events) {
                         entry -> entry.getKey().getEventName(),
                         Entry::getValue
                 ));
+    }
+
+    @Override
+    public Map<EventType, Integer> events() {
+        return Collections.unmodifiableMap(events);
     }
 }

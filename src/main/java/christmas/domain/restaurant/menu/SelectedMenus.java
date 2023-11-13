@@ -13,11 +13,6 @@ public record SelectedMenus(List<SelectedMenu> menus) {
                 .toList());
     }
 
-    @Override
-    public List<SelectedMenu> menus() {
-        return Collections.unmodifiableList(menus);
-    }
-
     public List<MenuType> extractUniqueMenuTypes() {
         return menus.stream()
                 .map(SelectedMenu::menu)
@@ -37,5 +32,10 @@ public record SelectedMenus(List<SelectedMenu> menus) {
         return menus.stream()
                 .mapToInt(SelectedMenu::calculateSinglePrice)
                 .sum();
+    }
+
+    @Override
+    public List<SelectedMenu> menus() {
+        return Collections.unmodifiableList(menus);
     }
 }

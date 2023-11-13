@@ -23,7 +23,7 @@ public record EventJoinHistory(EventBenefitPrices benefitPrices, EventGifts even
 
     public void addFreeGift(final Menu giftMenu) {
         eventGifts.add(giftMenu);
-        addParticipatedEvent(EventType.GIVING_EVENT, giftMenu.price());
+        addParticipatedEvent(EventType.GIVING_EVENT, giftMenu.getPrice());
     }
 
     public int calculateTotalBenefit() {

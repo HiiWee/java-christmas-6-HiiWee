@@ -29,6 +29,6 @@ class ChampagneGiftEventTest {
         int actualDiscountPrice = history.calculateTotalBenefit();
 
         // then
-        assertThat(actualDiscountPrice).isEqualTo(Menu.CHAMPAGNE.price());
+        assertThat(actualDiscountPrice).isEqualTo(Menu.CHAMPAGNE.getPrice());
     }
 }

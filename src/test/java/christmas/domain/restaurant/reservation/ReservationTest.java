@@ -80,7 +80,7 @@ class ReservationTest {
     void getTotalPrice() {
         // given
         int expectedTotalPrice =
-                Menu.BARBECUE_RIBS.price() * 10 + Menu.CHAMPAGNE.price() * 5 + Menu.CHOCO_CAKE.price() * 5;
+                Menu.BARBECUE_RIBS.getPrice() * 10 + Menu.CHAMPAGNE.getPrice() * 5 + Menu.CHOCO_CAKE.getPrice() * 5;
 
         // when
         int totalPrice = reservation.getTotalPrice();

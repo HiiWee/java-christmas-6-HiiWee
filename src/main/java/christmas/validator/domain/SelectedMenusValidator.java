@@ -6,6 +6,8 @@ import christmas.validator.domain.exception.DomainExceptionMessage;
 import java.util.List;
 import java.util.regex.Pattern;
 
+
+// TODO input 단계에서 할 수 있는 검증 추려내기
 public class SelectedMenusValidator {
 
     private static final Pattern INPUT_MENU_REGEX = Pattern.compile("^[가-힣]+-[1-9][0-9]*$");
