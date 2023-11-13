@@ -17,6 +17,10 @@ public enum EventBadge {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public static EventBadge findBadge(final int totalBenefit) {
         return Arrays.stream(values())
                 .filter(eventBadge -> eventBadge.canGetBadge(totalBenefit))
@@ -26,9 +30,5 @@ public enum EventBadge {
 
     private boolean canGetBadge(final int benefit) {
         return benefit >= winningPrice;
-    }
-
-    public String getName() {
-        return name;
     }
 }

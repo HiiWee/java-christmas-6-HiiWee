@@ -3,7 +3,7 @@ package christmas.domain.event;
 import christmas.domain.event.eventhistory.EventJoinHistory;
 import java.util.Optional;
 
-public class EventJoinHistoryRepository {
+public class EventRepository {
 
     private EventJoinHistory history;
 

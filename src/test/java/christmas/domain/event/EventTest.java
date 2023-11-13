@@ -8,34 +8,26 @@ import christmas.domain.restaurant.reservation.Reservation;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class EventTest {
 
-    @DisplayName("10_000원 이하의 금액일 경우 이벤트를 참여할 수 없다.")
-    @Test
-    void canNotJoinEvent_lessThan10_000() {
+    @DisplayName("이벤트를 참여할 수 있는 최소 금액은 10_000원 이다.")
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            아이스크림-10, true
+            아이스크림-1, false
+            """)
+    void joinEvent_limitPriceIs_10000(String inputMenu, boolean expectCanJoinEvent) {
         // given
-        SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("아이스크림-1", "제로콜라-1"));
+        SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of(inputMenu));
         Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
 
         // when
         boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
 
         // then
-        assertThat(canJoinAnyEvent).isFalse();
-    }
-
-    @DisplayName("10_000원 이상 금액에, 메뉴 타입이 음료만 있지 않다면 이벤트에 참여할 수 있다.")
-    @Test
-    void canJoinAnyEvent() {
-        // given
-        SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("레드와인-10", "제로콜라-1", "아이스크림-1"));
-        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
-
-        // when
-        boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
-
-        // then
-        assertThat(canJoinAnyEvent).isTrue();
+        assertThat(canJoinAnyEvent).isEqualTo(expectCanJoinEvent);
     }
 }

@@ -1,6 +1,7 @@
 package christmas.domain.event.eventhistory;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import christmas.domain.event.EventType;
 import christmas.domain.restaurant.menu.Menu;
@@ -35,5 +36,25 @@ class EventJoinHistoryTest {
 
         // then
         assertThat(totalBenefit).isEqualTo(Menu.CHAMPAGNE.price());
+    }
+
+
+    @DisplayName("할인 이벤트 가격과 전체 이벤트 가격을 계산할 수 있다.")
+    @Test
+    void calculate_benefit_discountBenefitOnly_or_totalBenefit() {
+        // given
+        EventJoinHistory history = EventJoinHistory.getInstance();
+        history.addParticipatedEvent(EventType.CHRISTMAS_EVENT, 1000);
+        history.addFreeGift(Menu.BARBECUE_RIBS);
+
+        // when
+        int discountBenefit = history.calculateDiscountBenefit();
+        int totalBenefit = history.calculateTotalBenefit();
+
+        // then
+        assertAll(
+                () -> assertThat(discountBenefit).isEqualTo(1000),
+                () -> assertThat(totalBenefit).isEqualTo(55000)
+        );
     }
 }

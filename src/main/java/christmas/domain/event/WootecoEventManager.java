@@ -10,16 +10,16 @@ import java.util.function.Supplier;
 
 public class WootecoEventManager {
 
-    private final EventJoinHistoryRepository eventJoinHistoryRepository;
+    private final EventRepository eventRepository;
 
-    public WootecoEventManager(final EventJoinHistoryRepository eventJoinHistoryRepository) {
-        this.eventJoinHistoryRepository = eventJoinHistoryRepository;
+    public WootecoEventManager(final EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
     public void applyAllEvents(final Supplier<Reservation> reservationSupplier) {
         EventJoinHistory history = EventJoinHistory.getInstance();
         EventType.joinEvents(reservationSupplier.get(), history);
-        eventJoinHistoryRepository.saveEventHistory(history);
+        eventRepository.saveEventHistory(history);
     }
 
     public BenefitDetails createBenefitDetails() {
@@ -39,7 +39,7 @@ public class WootecoEventManager {
     }
 
     private EventJoinHistory findEventHistoryObject() {
-        return eventJoinHistoryRepository.findEventHistory()
+        return eventRepository.findEventHistory()
                 .orElseThrow(DomainExceptionMessage.NOT_FOUND_EVENT_HISTORY::create);
     }
 }

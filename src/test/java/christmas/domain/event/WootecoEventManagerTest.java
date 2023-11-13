@@ -21,12 +21,12 @@ class WootecoEventManagerTest {
 
     WootecoEventManager eventManager;
 
-    EventJoinHistoryRepository eventJoinHistoryRepository;
+    EventRepository eventRepository;
 
     @BeforeEach
     void setUp() {
-        eventJoinHistoryRepository = new EventJoinHistoryRepository();
-        eventManager = new WootecoEventManager(eventJoinHistoryRepository);
+        eventRepository = new EventRepository();
+        eventManager = new WootecoEventManager(eventRepository);
     }
 
     @DisplayName("이벤트에 등록하면 이벤트에 대한 혜택 기록을 저장하고 뱃지를 받을 수 있다.")
@@ -40,7 +40,7 @@ class WootecoEventManagerTest {
 
         // when
         eventManager.applyAllEvents(() -> reservation);
-        EventJoinHistory history = eventJoinHistoryRepository.findEventHistory().get();
+        EventJoinHistory history = eventRepository.findEventHistory().get();
         int benefitPrice = history.calculateTotalBenefit();
         EventBadge eventBadge = EventBadge.findBadge(benefitPrice);
         Map<Menu, Integer> giftCounts = history.eventGifts().giftCounts();
@@ -59,7 +59,7 @@ class WootecoEventManagerTest {
         // given
         EventJoinHistory history = EventJoinHistory.getInstance();
         history.addParticipatedEvent(EventType.WEEKEND_EVENT, 555555);
-        eventJoinHistoryRepository.saveEventHistory(history);
+        eventRepository.saveEventHistory(history);
 
         // when
         BenefitDetails benefitDetails = eventManager.createBenefitDetails();
@@ -84,7 +84,7 @@ class WootecoEventManagerTest {
         );
 
         // when
-        eventJoinHistoryRepository.saveEventHistory(history);
+        eventRepository.saveEventHistory(history);
         PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(() -> reservation);
 
         // then
@@ -99,7 +99,7 @@ class WootecoEventManagerTest {
         history.addParticipatedEvent(EventType.WEEKEND_EVENT, 20_000);
 
         // when
-        eventJoinHistoryRepository.saveEventHistory(history);
+        eventRepository.saveEventHistory(history);
         BadgeResult badgeResult = eventManager.selectEventBadge();
 
         // then
