@@ -1,6 +1,7 @@
 package christmas.dto;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
+import java.util.function.Supplier;
 
 public record BenefitDetails(BenefitPriceResults benefitPrices, GiftCountResults giftCounts) {
 
@@ -9,28 +10,27 @@ public record BenefitDetails(BenefitPriceResults benefitPrices, GiftCountResults
 
     public static BenefitDetails createFrom(final EventJoinHistory history) {
         BenefitPriceResults benefitPrices = BenefitPriceResults.createFrom(history.benefitPrices());
-        GiftCountResults giftCounts = GiftCountResults.createFrom(history.giftCounts());
+        GiftCountResults giftCounts = GiftCountResults.createFrom(history.eventGifts());
         return new BenefitDetails(benefitPrices, giftCounts);
     }
 
-    // TODO 리팩토링
     public String createGiftMenuMessage() {
-        String message = giftCounts.createMessage();
-        if (message.trim().isEmpty()) {
-            return EMPTY_MESSAGE;
-        }
-        return message;
+        return createMessage(giftCounts::createMessage);
     }
 
     public String createBenefitDetailsMessage() {
-        String message = benefitPrices.createMessage();
-        if (message.trim().isEmpty()) {
-            return EMPTY_MESSAGE;
-        }
-        return message;
+        return createMessage(benefitPrices::createMessage);
     }
 
     public String getTotalBenefitPriceMessage() {
         return String.format(TOTAL_BENEFIT_PRICE_FORMAT, -benefitPrices.getTotalBenefit());
+    }
+
+    private String createMessage(Supplier<String> supplier) {
+        String message = supplier.get();
+        if (message.trim().isEmpty()) {
+            return EMPTY_MESSAGE;
+        }
+        return message;
     }
 }
