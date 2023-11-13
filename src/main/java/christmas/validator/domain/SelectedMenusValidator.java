@@ -16,8 +16,11 @@ public class SelectedMenusValidator {
     }
 
     public static void validateMenus(final List<String> inputMenus) {
-        if (isInvalidFormat(inputMenus) || isDuplicates(inputMenus) || hasTooManyMenu(inputMenus)) {
+        if (isInvalidFormat(inputMenus) || isDuplicates(inputMenus)) {
             throw DomainExceptionMessage.INVALID_ORDER.create();
+        }
+        if (hasTooManyMenu(inputMenus)) {
+            throw DomainExceptionMessage.TOO_MANY_RESERVATION_MENU.create();
         }
     }
 

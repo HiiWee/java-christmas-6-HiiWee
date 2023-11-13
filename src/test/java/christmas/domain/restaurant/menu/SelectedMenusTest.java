@@ -43,7 +43,7 @@ class SelectedMenusTest {
 
         // then
         assertThatIllegalArgumentException().isThrownBy(() -> SelectedMenus.createFrom(menus))
-                .withMessageContaining(DomainExceptionMessage.INVALID_ORDER.message());
+                .withMessageContaining(DomainExceptionMessage.TOO_MANY_RESERVATION_MENU.message());
     }
 
     @DisplayName("포함되어 있는 모든 메뉴의 타입을 중복 없이 가져올 수 있다.")
