@@ -32,7 +32,7 @@ class SpecialDiscountEventTest {
         DiscountEvent specialDiscountEvent = new SpecialDiscountEvent();
         EventJoinHistory history = EventJoinHistory.getInstance();
         specialDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
-        int actualDiscountPrice = history.benefitPrices().events().get(EventType.SPECIAL_EVENT);
+        int actualDiscountPrice = history.calculateTotalBenefit();
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);
