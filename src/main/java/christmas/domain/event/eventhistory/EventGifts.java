@@ -8,13 +8,16 @@ import java.util.stream.Collectors;
 
 public record EventGifts(Map<Menu, Integer> giftCounts) {
 
+    private static final int DEFAULT_VALUE = 0;
+    private static final int INCREASE_AMOUNT = 1;
+
     @Override
     public Map<Menu, Integer> giftCounts() {
         return Collections.unmodifiableMap(giftCounts);
     }
 
     public void add(final Menu menu) {
-        giftCounts.put(menu, giftCounts.getOrDefault(menu, 0) + 1);
+        giftCounts.put(menu, giftCounts.getOrDefault(menu, DEFAULT_VALUE) + INCREASE_AMOUNT);
     }
 
     public Map<String, Integer> convertMenuToName() {

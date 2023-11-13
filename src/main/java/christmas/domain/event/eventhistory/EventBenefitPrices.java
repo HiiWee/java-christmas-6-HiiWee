@@ -4,7 +4,6 @@ import christmas.domain.event.EventType;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public record EventBenefitPrices(Map<EventType, Integer> events) {
