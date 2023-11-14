@@ -7,7 +7,7 @@ public interface Event {
 
     static boolean canJoinAnyEvent(final Reservation reservation) {
         int totalPrice = reservation.getTotalPrice();
-        return EventCondition.canParticipatePrice(totalPrice);
+        return EventCondition.canJoinEventPrice(totalPrice);
     }
 
     void participateEvent(final EventJoinHistory history, final Reservation reservation);

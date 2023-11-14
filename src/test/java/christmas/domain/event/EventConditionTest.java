@@ -14,7 +14,7 @@ class EventConditionTest {
         int price = 10000;
 
         // when
-        boolean result = EventCondition.canParticipatePrice(price);
+        boolean result = EventCondition.canJoinEventPrice(price);
 
         // then
         assertThat(result).isTrue();

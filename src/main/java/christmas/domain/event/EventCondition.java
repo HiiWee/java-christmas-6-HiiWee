@@ -10,7 +10,7 @@ public enum EventCondition {
         this.value = value;
     }
 
-    public static boolean canParticipatePrice(final int price) {
+    public static boolean canJoinEventPrice(final int price) {
         return MIN_EVENT_JOIN_PRICE.value <= price;
     }
 }
