@@ -1,13 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.event.discount.ChristmasDiscountEvent;
-import christmas.domain.event.discount.SpecialDiscountEvent;
-import christmas.domain.event.discount.WeekdayDiscountEvent;
-import christmas.domain.event.discount.WeekendDiscountEvent;
-import christmas.domain.event.eventhistory.EventJoinHistory;
-import christmas.domain.event.gift.ChampagneGiftEvent;
 import christmas.domain.restaurant.date.DateType;
-import christmas.domain.restaurant.reservation.Reservation;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -16,27 +9,22 @@ import java.util.stream.Collectors;
 
 public enum EventType {
 
-    CHRISTMAS_EVENT("크리스마스 디데이 할인", DateType.CHRISTMAS, new ChristmasDiscountEvent()),
-    WEEKDAY_EVENT("평일 할인", DateType.WEEKDAY, new WeekdayDiscountEvent()),
-    WEEKEND_EVENT("주말 할인", DateType.WEEKEND, new WeekendDiscountEvent()),
-    SPECIAL_EVENT("특별 할인", DateType.SPECIAL, new SpecialDiscountEvent()),
-    GIVING_EVENT("증정 이벤트", DateType.NONE, new ChampagneGiftEvent());
+    CHRISTMAS_EVENT("크리스마스 디데이 할인", DateType.CHRISTMAS),
+    WEEKDAY_EVENT("평일 할인", DateType.WEEKDAY),
+    WEEKEND_EVENT("주말 할인", DateType.WEEKEND),
+    SPECIAL_EVENT("특별 할인", DateType.SPECIAL),
+    GIVING_EVENT("증정 이벤트", DateType.NONE);
 
     private static final Map<DateType, EventType> EVENT_TYPE_GROUPING_BY_DATE = Arrays.stream(values()).collect(
             Collectors.toMap(eventType -> eventType.dateType, Function.identity())
     );
-    private static final List<Event> ALL_EVENTS = Arrays.stream(values())
-            .map(eventType -> eventType.event)
-            .toList();
 
-    private final String eventName;
+    private final String name;
     private final DateType dateType;
-    private final Event event;
 
-    EventType(final String eventName, final DateType dateType, final Event event) {
-        this.eventName = eventName;
+    EventType(final String name, final DateType dateType) {
+        this.name = name;
         this.dateType = dateType;
-        this.event = event;
     }
 
     public static boolean isNotGivingEvent(final EventType eventType) {
@@ -49,13 +37,7 @@ public enum EventType {
                 .toList();
     }
 
-    public static void joinEvents(final Reservation reservation, final EventJoinHistory history) {
-        if (Event.canJoinAnyEvent(reservation)) {
-            ALL_EVENTS.forEach(event -> event.participateEvent(history, reservation));
-        }
-    }
-
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return name;
     }
 }

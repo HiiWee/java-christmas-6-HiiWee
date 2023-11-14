@@ -1,4 +1,4 @@
-package christmas.domain.event.discount;
+package christmas.domain.event.list;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,14 +12,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class WeekdayDiscountEventTest {
+class WeekendDiscountEventTest {
 
-    @DisplayName("평일 이벤트는 디저트 메뉴의 개수에 따라 할인액이 결정됩니다.")
+    @DisplayName("주말 이벤트는 메인 메뉴의 개수에 따라 할인액이 결정됩니다.")
     @ParameterizedTest
     @CsvSource(textBlock = """
-            3, '아이스크림-2,초코케이크-3,시저샐러드-2', 10115
-            12, '아이스크림-1,초코케이크-1,바비큐립-3,티본스테이크-3', 4046
-            25, '아이스크림-10,초코케이크-5,바비큐립-5', 30345
+            1, '바비큐립-1,아이스크림-2,초코케이크-3,시저샐러드-2', 2023
+            15, '아이스크림-1,초코케이크-1,바비큐립-3,티본스테이크-3', 12138
+            30, '아이스크림-10,초코케이크-5,바비큐립-5', 10115
             """)
     void participatedEvents_with_weekdayEvent(int date, String inputAllMenu, int expectedDiscountPrice) {
         // given
@@ -28,13 +28,12 @@ class WeekdayDiscountEventTest {
         SelectedDate selectedDate = SelectedDate.createFrom(date);
 
         // when
-        DiscountEvent weekdayDiscountEvent = new WeekdayDiscountEvent();
+        DiscountEvent weekendDiscountEvent = new WeekendDiscountEvent();
         EventJoinHistory history = EventJoinHistory.getInstance();
-        weekdayDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
+        weekendDiscountEvent.participateEvent(history, new Reservation(selectedMenus, selectedDate));
         int actualDiscountPrice = history.calculateTotalBenefit();
 
         // then
         assertThat(actualDiscountPrice).isEqualTo(expectedDiscountPrice);
     }
-
 }

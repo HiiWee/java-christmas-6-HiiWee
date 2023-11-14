@@ -3,6 +3,7 @@ package christmas.domain.event.gift;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.specification.ChampagneGiftEvent;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.menu.SelectedMenus;

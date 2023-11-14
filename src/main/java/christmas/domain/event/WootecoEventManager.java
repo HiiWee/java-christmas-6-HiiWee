@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.domain.event.badge.EventBadge;
+import christmas.domain.event.container.EventContainer;
 import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
 import christmas.dto.badge.BadgeResult;
@@ -10,16 +12,17 @@ import java.util.function.Supplier;
 
 public class WootecoEventManager {
 
-    private final EventRepository eventRepository;
+    private final EventManageRepository eventManageRepository;
 
-    public WootecoEventManager(final EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
+    public WootecoEventManager(final EventManageRepository eventManageRepository) {
+        this.eventManageRepository = eventManageRepository;
     }
 
     public void applyAllEvents(final Supplier<Reservation> reservationSupplier) {
         EventJoinHistory history = EventJoinHistory.getInstance();
-        EventType.joinEvents(reservationSupplier.get(), history);
-        eventRepository.saveEventHistory(history);
+        EventContainer eventContainer = EventContainer.getInstance();
+        eventContainer.joinEvents(reservationSupplier.get(), history);
+        eventManageRepository.saveEventHistory(history);
     }
 
     public BenefitDetails createBenefitDetails() {
@@ -39,7 +42,7 @@ public class WootecoEventManager {
     }
 
     private EventJoinHistory findEventHistoryObject() {
-        return eventRepository.findEventHistory()
+        return eventManageRepository.findEventHistory()
                 .orElseThrow(DomainExceptionMessage.NOT_FOUND_EVENT_HISTORY::create);
     }
 }

@@ -1,14 +1,11 @@
-package christmas.domain.event;
+package christmas.domain.event.list;
 
 import christmas.domain.event.eventhistory.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
 
 public interface Event {
 
-    static boolean canJoinAnyEvent(final Reservation reservation) {
-        int totalPrice = reservation.getTotalPrice();
-        return EventCondition.canJoinEventPrice(totalPrice);
-    }
+    boolean canJoinEvent(final Reservation reservation);
 
     void participateEvent(final EventJoinHistory history, final Reservation reservation);
 }
