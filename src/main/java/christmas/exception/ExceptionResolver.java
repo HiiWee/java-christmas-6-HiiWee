@@ -5,6 +5,8 @@ import java.util.function.Supplier;
 
 public class ExceptionResolver {
 
+    private static final String ERROR_PREFIX_FORMAT = "[ERROR] %s";
+
     private ExceptionResolver() {
     }
 
@@ -27,6 +29,6 @@ public class ExceptionResolver {
     }
 
     private static void printExceptionMessage(final String message) {
-        System.out.println(message);
+        System.out.println(String.format(ERROR_PREFIX_FORMAT, message));
     }
 }
