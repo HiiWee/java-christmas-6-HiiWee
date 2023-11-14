@@ -3,7 +3,8 @@ package christmas.domain.event;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.badge.EventBadge;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.menu.SelectedMenus;
@@ -21,12 +22,12 @@ class WootecoEventManagerTest {
 
     WootecoEventManager eventManager;
 
-    EventRepository eventRepository;
+    EventManageRepository eventManageRepository;
 
     @BeforeEach
     void setUp() {
-        eventRepository = new EventRepository();
-        eventManager = new WootecoEventManager(eventRepository);
+        eventManageRepository = new EventManageRepository();
+        eventManager = new WootecoEventManager(eventManageRepository);
     }
 
     @DisplayName("이벤트에 등록하면 이벤트에 대한 혜택 기록을 저장하고 뱃지를 받을 수 있다.")
@@ -40,7 +41,7 @@ class WootecoEventManagerTest {
 
         // when
         eventManager.applyAllEvents(() -> reservation);
-        EventJoinHistory history = eventRepository.findEventHistory().get();
+        EventJoinHistory history = eventManageRepository.findEventHistory().get();
         int benefitPrice = history.calculateTotalBenefit();
         EventBadge eventBadge = EventBadge.findBadge(benefitPrice);
         Map<Menu, Integer> giftCounts = history.eventGifts().giftCounts();
@@ -59,11 +60,11 @@ class WootecoEventManagerTest {
         // given
         EventJoinHistory history = EventJoinHistory.getInstance();
         history.addParticipatedEvent(EventType.WEEKEND_EVENT, 555555);
-        eventRepository.saveEventHistory(history);
+        eventManageRepository.saveEventHistory(history);
 
         // when
         BenefitDetails benefitDetails = eventManager.createBenefitDetails();
-        int actualBenefit = benefitDetails.benefitPrices().benefitPrices().get(EventType.WEEKEND_EVENT.getEventName());
+        int actualBenefit = benefitDetails.benefitPrices().benefitPrices().get(EventType.WEEKEND_EVENT.getName());
 
         // then
         assertThat(actualBenefit).isEqualTo(555555);
@@ -84,7 +85,7 @@ class WootecoEventManagerTest {
         );
 
         // when
-        eventRepository.saveEventHistory(history);
+        eventManageRepository.saveEventHistory(history);
         PaymentAmountResult paymentAmount = eventManager.createPaymentAmount(() -> reservation);
 
         // then
@@ -99,7 +100,7 @@ class WootecoEventManagerTest {
         history.addParticipatedEvent(EventType.WEEKEND_EVENT, 20_000);
 
         // when
-        eventRepository.saveEventHistory(history);
+        eventManageRepository.saveEventHistory(history);
         BadgeResult badgeResult = eventManager.selectEventBadge();
 
         // then

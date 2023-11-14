@@ -1,6 +1,6 @@
 package christmas;
 
-import christmas.domain.event.EventRepository;
+import christmas.domain.event.EventManageRepository;
 import christmas.domain.event.WootecoEventManager;
 import christmas.domain.restaurant.BookingRepository;
 import christmas.domain.restaurant.WootecoRestaurantManager;
@@ -15,7 +15,7 @@ public class Application {
                 new InputViewProxy(new InputView()),
                 new OutputView(),
                 new WootecoRestaurantManager(new BookingRepository()),
-                new WootecoEventManager(new EventRepository()));
+                new WootecoEventManager(new EventManageRepository()));
         eventPlanner.run();
     }
 }

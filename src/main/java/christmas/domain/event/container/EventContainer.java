@@ -1,6 +1,6 @@
 package christmas.domain.event.container;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.event.specification.ChampagneGiftEvent;
 import christmas.domain.event.specification.ChristmasDiscountEvent;
 import christmas.domain.event.specification.Event;

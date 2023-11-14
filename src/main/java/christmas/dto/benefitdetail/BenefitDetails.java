@@ -1,6 +1,6 @@
 package christmas.dto.benefitdetail;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import java.util.function.Supplier;
 
 public record BenefitDetails(BenefitPriceResults benefitPrices, FreeGiftResults giftCounts) {

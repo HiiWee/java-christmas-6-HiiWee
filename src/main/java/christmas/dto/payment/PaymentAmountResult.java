@@ -1,6 +1,6 @@
 package christmas.dto.payment;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
 
 public record PaymentAmountResult(int paymentAmount) {

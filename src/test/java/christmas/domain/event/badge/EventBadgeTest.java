@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.event.badge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

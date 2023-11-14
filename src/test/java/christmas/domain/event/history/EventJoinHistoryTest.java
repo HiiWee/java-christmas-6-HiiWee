@@ -1,4 +1,4 @@
-package christmas.domain.event.eventhistory;
+package christmas.domain.event.history;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;

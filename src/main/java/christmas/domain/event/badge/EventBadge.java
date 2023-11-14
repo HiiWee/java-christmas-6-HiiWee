@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.event.badge;
 
 import java.util.Arrays;
 

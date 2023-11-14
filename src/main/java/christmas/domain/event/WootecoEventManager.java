@@ -2,7 +2,7 @@ package christmas.domain.event;
 
 import christmas.domain.event.badge.EventBadge;
 import christmas.domain.event.container.EventContainer;
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.reservation.Reservation;
 import christmas.dto.badge.BadgeResult;
 import christmas.dto.benefitdetail.BenefitDetails;

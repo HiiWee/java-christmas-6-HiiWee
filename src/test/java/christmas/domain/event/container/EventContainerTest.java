@@ -3,7 +3,7 @@ package christmas.domain.event.container;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.SelectedMenus;
 import christmas.domain.restaurant.reservation.Reservation;

@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import java.util.Optional;
 
 public class EventManageRepository {

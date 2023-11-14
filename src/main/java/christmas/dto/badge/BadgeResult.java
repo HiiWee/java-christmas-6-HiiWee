@@ -1,6 +1,6 @@
 package christmas.dto.badge;
 
-import christmas.domain.event.EventBadge;
+import christmas.domain.event.badge.EventBadge;
 
 public record BadgeResult(String name) {
 

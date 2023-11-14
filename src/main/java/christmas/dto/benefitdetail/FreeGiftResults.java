@@ -1,6 +1,6 @@
 package christmas.dto.benefitdetail;
 
-import christmas.domain.event.eventhistory.EventGifts;
+import christmas.domain.event.history.EventGifts;
 import java.util.Map;
 import java.util.stream.Collectors;
 

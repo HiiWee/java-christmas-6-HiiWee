@@ -1,4 +1,4 @@
-package christmas.domain.event;
+package christmas.domain.event.container;
 
 public enum EventCondition {
 
