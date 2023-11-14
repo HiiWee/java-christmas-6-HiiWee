@@ -19,7 +19,7 @@ class ChampagneGiftEventTest {
         // given
         Reservation reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("티본스테이크-3")),
-                SelectedDate.createFrom("29")
+                SelectedDate.createFrom(29)
         );
 
         // when

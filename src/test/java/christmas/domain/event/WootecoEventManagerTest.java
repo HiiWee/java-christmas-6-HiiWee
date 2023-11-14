@@ -35,7 +35,7 @@ class WootecoEventManagerTest {
         // given
         int expectedBenefitPrice = 2023 * 10 + 3400 + 1000 + 25000;
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of("타파스-10", "초코케이크-10"));
-        SelectedDate selectedDate = SelectedDate.createFrom("25");
+        SelectedDate selectedDate = SelectedDate.createFrom(25);
         Reservation reservation = new Reservation(selectedMenus, selectedDate);
 
         // when
@@ -80,7 +80,7 @@ class WootecoEventManagerTest {
         history.addFreeGift(Menu.CHAMPAGNE);
         Reservation reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("해산물파스타-2", "레드와인-1", "초코케이크-1")),
-                SelectedDate.createFrom("24")
+                SelectedDate.createFrom(24)
         );
 
         // when

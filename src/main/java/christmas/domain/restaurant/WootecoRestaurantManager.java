@@ -16,7 +16,7 @@ public class WootecoRestaurantManager {
         this.bookingRepository = bookingRepository;
     }
 
-    public void addSelectedDate(final String inputDate) {
+    public void addSelectedDate(final int inputDate) {
         SelectedDate selectedDate = SelectedDate.createFrom(inputDate);
         bookingRepository.saveSelectedDate(selectedDate);
     }

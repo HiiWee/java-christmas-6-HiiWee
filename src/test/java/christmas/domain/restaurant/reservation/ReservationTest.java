@@ -23,7 +23,7 @@ class ReservationTest {
     void setUp() {
         reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("바비큐립-10", "샴페인-5", "초코케이크-5")),
-                SelectedDate.createFrom("25")
+                SelectedDate.createFrom(25)
         );
     }
 

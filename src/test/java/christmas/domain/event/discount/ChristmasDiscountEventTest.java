@@ -22,7 +22,7 @@ class ChristmasDiscountEventTest {
             2, 1100
             1, 1000
             """)
-    void participatedEvents_with_christmasEvent(String date, int expectedDiscountPrice) {
+    void participatedEvents_with_christmasEvent(int date, int expectedDiscountPrice) {
         // given
         Reservation reservation = new Reservation(
                 SelectedMenus.createFrom(List.of("양송이수프-1", "타파스-2")),

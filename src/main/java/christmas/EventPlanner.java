@@ -7,17 +7,17 @@ import christmas.dto.benefitdetail.BenefitDetails;
 import christmas.dto.payment.PaymentAmountResult;
 import christmas.dto.reservation.ReservedResults;
 import christmas.exception.ExceptionResolver;
-import christmas.view.InputView;
+import christmas.view.InputViewable;
 import christmas.view.OutputView;
 
 public class EventPlanner {
 
-    private final InputView inputView;
+    private final InputViewable inputView;
     private final OutputView outputView;
     private final WootecoRestaurantManager restaurantManager;
     private final WootecoEventManager eventManager;
 
-    public EventPlanner(final InputView inputView, final OutputView outputView,
+    public EventPlanner(final InputViewable inputView, final OutputView outputView,
                         final WootecoRestaurantManager restaurantManager, final WootecoEventManager eventManager) {
         this.inputView = inputView;
         this.outputView = outputView;

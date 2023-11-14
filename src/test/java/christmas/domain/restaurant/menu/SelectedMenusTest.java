@@ -15,7 +15,7 @@ class SelectedMenusTest {
 
     @DisplayName("올바르지 않은 메뉴 입력이라면 예외가 발생한다.")
     @ParameterizedTest
-    @ValueSource(strings = {"바비큐립=3", "크리스마스파스타-0", "123-1"})
+    @ValueSource(strings = {"크리스마스파스타-0", "123-1"})
     void createSelectedMenus_exception_invalidInputFormat(String invalidMenu) {
         // given & when & then
         assertThatIllegalArgumentException().isThrownBy(() -> SelectedMenus.createFrom(List.of(invalidMenu)))

@@ -4,23 +4,13 @@ import christmas.validator.domain.exception.DomainExceptionMessage;
 
 public record SelectedDate(int date) {
 
-    public static SelectedDate createFrom(final String inputDate) {
+    public static SelectedDate createFrom(final int inputDate) {
         validate(inputDate);
-        int date = Integer.parseInt(inputDate);
-        return new SelectedDate(date);
+        return new SelectedDate(inputDate);
     }
 
-    private static void validate(final String inputDate) {
-        validateNumber(inputDate);
-        validateRange(Integer.parseInt(inputDate));
-    }
-
-    private static void validateNumber(final String inputDate) {
-        try {
-            Integer.parseInt(inputDate);
-        } catch (NumberFormatException e) {
-            throw DomainExceptionMessage.INVALID_INPUT_DATE.create();
-        }
+    private static void validate(final int inputDate) {
+        validateRange(inputDate);
     }
 
     private static void validateRange(final int inputDate) {

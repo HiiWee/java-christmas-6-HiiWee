@@ -29,7 +29,7 @@ class WootecoRestaurantManagerTest {
     @Test
     void addSelectedDate() {
         // given
-        String inputDate = "10";
+        int inputDate = 10;
         SelectedDate expectedDate = SelectedDate.createFrom(inputDate);
 
         // when
@@ -63,7 +63,7 @@ class WootecoRestaurantManagerTest {
                 해산물파스타 2개
                 타파스 10개""";
         String expectedTotalPriceMessage = "125,000원";
-        manager.addSelectedDate("10");
+        manager.addSelectedDate(10);
         manager.addSelectedMenus(List.of("해산물파스타-2", "타파스-10"));
         manager.updateReservation();
 
@@ -90,7 +90,7 @@ class WootecoRestaurantManagerTest {
     @Test
     void updateReservation() {
         // given
-        manager.addSelectedDate("10");
+        manager.addSelectedDate(10);
         manager.addSelectedMenus(List.of("해산물파스타-2", "타파스-10"));
 
         // when

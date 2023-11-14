@@ -21,7 +21,7 @@ class WeekdayDiscountEventTest {
             12, '아이스크림-1,초코케이크-1,바비큐립-3,티본스테이크-3', 4046
             25, '아이스크림-10,초코케이크-5,바비큐립-5', 30345
             """)
-    void participatedEvents_with_weekdayEvent(String date, String inputAllMenu, int expectedDiscountPrice) {
+    void participatedEvents_with_weekdayEvent(int date, String inputAllMenu, int expectedDiscountPrice) {
         // given
         List<String> inputMenus = Arrays.stream(inputAllMenu.split(",")).toList();
         SelectedMenus selectedMenus = SelectedMenus.createFrom(inputMenus);

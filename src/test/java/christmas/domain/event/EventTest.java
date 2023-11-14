@@ -21,7 +21,7 @@ class EventTest {
     void joinEvent_limitPriceIs_10000(String inputMenu, boolean expectCanJoinEvent) {
         // given
         SelectedMenus selectedMenus = SelectedMenus.createFrom(List.of(inputMenu));
-        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom("10"));
+        Reservation reservation = new Reservation(selectedMenus, SelectedDate.createFrom(10));
 
         // when
         boolean canJoinAnyEvent = Event.canJoinAnyEvent(reservation);
