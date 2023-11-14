@@ -1,6 +1,6 @@
-package christmas.domain.event.list;
+package christmas.domain.event.specification;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.menu.Menu;
 import christmas.domain.restaurant.reservation.Reservation;
 

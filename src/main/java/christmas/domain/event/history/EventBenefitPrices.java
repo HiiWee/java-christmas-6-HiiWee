@@ -33,7 +33,7 @@ public record EventBenefitPrices(Map<EventType, Integer> events) {
         return events.entrySet()
                 .stream()
                 .collect(Collectors.toMap(
-                        entry -> entry.getKey().getEventName(),
+                        entry -> entry.getKey().getName(),
                         Entry::getValue
                 ));
     }

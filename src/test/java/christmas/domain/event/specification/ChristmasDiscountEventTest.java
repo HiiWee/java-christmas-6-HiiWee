@@ -1,8 +1,8 @@
-package christmas.domain.event.list;
+package christmas.domain.event.specification;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.domain.event.eventhistory.EventJoinHistory;
+import christmas.domain.event.history.EventJoinHistory;
 import christmas.domain.restaurant.date.SelectedDate;
 import christmas.domain.restaurant.menu.SelectedMenus;
 import christmas.domain.restaurant.reservation.Reservation;
@@ -30,7 +30,7 @@ class ChristmasDiscountEventTest {
         );
 
         // when
-        DiscountEvent discountEvent = new ChristmasDiscountEvent();
+        Event discountEvent = new ChristmasDiscountEvent();
         EventJoinHistory history = EventJoinHistory.getInstance();
         discountEvent.participateEvent(history, reservation);
         System.out.println(history);
