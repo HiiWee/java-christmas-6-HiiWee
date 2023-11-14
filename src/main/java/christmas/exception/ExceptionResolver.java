@@ -10,12 +10,12 @@ public class ExceptionResolver {
     private ExceptionResolver() {
     }
 
-    public static <T> void resolveProcessAfterInput(final Consumer<T> consumer, final Supplier<T> supplier) {
+    public static <T> void resolveProcessAfterInput(final Supplier<T> inputSupplier, final Consumer<T> consumer) {
         try {
-            consumer.accept(supplier.get());
+            consumer.accept(inputSupplier.get());
         } catch (IllegalArgumentException | IllegalStateException e) {
             printExceptionMessage(e.getMessage());
-            resolveProcessAfterInput(consumer, supplier);
+            resolveProcessAfterInput(inputSupplier, consumer);
         }
     }
 

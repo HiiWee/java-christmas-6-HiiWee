@@ -35,8 +35,8 @@ public class EventPlanner {
     }
 
     private void inputReservationInfo() {
-        ExceptionResolver.resolveProcessAfterInput(restaurantManager::addSelectedDate, inputView::inputVisitDate);
-        ExceptionResolver.resolveProcessAfterInput(restaurantManager::addSelectedMenus, inputView::inputMenus);
+        ExceptionResolver.resolveProcessAfterInput(inputView::inputVisitDate, restaurantManager::addSelectedDate);
+        ExceptionResolver.resolveProcessAfterInput(inputView::inputMenus, restaurantManager::addSelectedMenus);
         restaurantManager.updateReservation();
     }
 
