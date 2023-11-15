@@ -11,11 +11,14 @@ import christmas.view.OutputView;
 public class Application {
 
     public static void main(String[] args) {
-        EventPlanner eventPlanner = new EventPlanner(
+        EventViewer eventViewer = new EventViewer(
                 new InputViewProxy(new InputView()),
-                new OutputView(),
+                new OutputView()
+        );
+        EventPlanner eventPlanner = new EventPlanner(
+                eventViewer,
                 new WootecoRestaurantManager(new BookingRepository()),
                 new WootecoEventManager(new EventManageRepository()));
-        eventPlanner.run();
+        PlannerProcessor.run(eventPlanner);
     }
 }
