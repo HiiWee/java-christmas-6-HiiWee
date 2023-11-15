@@ -1,4 +1,4 @@
-package christmas;
+package christmas.promotionprocessor;
 
 import java.util.NoSuchElementException;
 import java.util.function.Consumer;

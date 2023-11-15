@@ -1,4 +1,4 @@
-package christmas;
+package christmas.promotionprocessor;
 
 import christmas.domain.event.WootecoEventManager;
 import christmas.domain.restaurant.WootecoRestaurantManager;
