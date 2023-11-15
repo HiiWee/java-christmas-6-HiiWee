@@ -1,6 +1,5 @@
 package christmas.promotionprocessor;
 
-import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -13,13 +12,14 @@ public enum PlannerProcessor {
     PRINT_PAYMENT_AMOUNT(EventPlanner::printPaymentAmount),
     PRINT_EVENT_BADGE(EventPlanner::printEventBadge);
 
+    private static final String NOT_FOUND_PROCESS_FOR_EXECUTE = "[ERROR] 실행할 수 있는 프로세스가 없습니다.";
     private static final Consumer<EventPlanner> processCombiner;
 
     static {
         processCombiner = Stream.of(values())
                 .map(processor -> processor.process)
                 .reduce(Consumer::andThen)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(() -> new IllegalStateException(NOT_FOUND_PROCESS_FOR_EXECUTE));
     }
 
     private final Consumer<EventPlanner> process;
