@@ -1,4 +1,4 @@
-package christmas.promotionprocessor;
+package christmas.processor;
 
 import christmas.dto.badge.BadgeResult;
 import christmas.dto.benefitdetail.BenefitDetails;

@@ -1,4 +1,4 @@
-package christmas.promotionprocessor;
+package christmas.processor;
 
 import java.util.function.Consumer;
 import java.util.stream.Stream;
