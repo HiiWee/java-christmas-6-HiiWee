@@ -19,4 +19,3 @@ public record SelectedDate(int date) {
         }
     }
 }
-
