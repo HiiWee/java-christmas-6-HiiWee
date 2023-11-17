@@ -32,7 +32,7 @@ public record Reservation(SelectedMenus selectedMenus, SelectedDate selectedDate
     }
 
     public int getReservedDate() {
-        return selectedDate.date();
+        return selectedDate.getDayOfMonth();
     }
 
     private List<EventType> findEventTypes() {

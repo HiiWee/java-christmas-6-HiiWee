@@ -1,5 +1,6 @@
 package christmas.domain.restaurant.date;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -10,21 +11,21 @@ public enum DateType {
     WEEKDAY(ChristmasPromotionDate::isWeekday),
     WEEKEND(ChristmasPromotionDate::isWeekend),
     SPECIAL(ChristmasPromotionDate::isSpecial),
-    NONE(ChristmasPromotionDate::getNone);
+    NONE(ignoreDate -> false);
 
-    private final Predicate<Integer> dateChecker;
+    private final Predicate<LocalDate> dateChecker;
 
-    DateType(final Predicate<Integer> dateChecker) {
+    DateType(final Predicate<LocalDate> dateChecker) {
         this.dateChecker = dateChecker;
     }
 
-    public static List<DateType> findDatTypes(final int date) {
+    public static List<DateType> findDatTypes(final LocalDate date) {
         return Arrays.stream(values())
                 .filter(dateType -> dateType.containsDate(date))
                 .toList();
     }
 
-    private boolean containsDate(final int date) {
+    private boolean containsDate(final LocalDate date) {
         return dateChecker.test(date);
     }
 }

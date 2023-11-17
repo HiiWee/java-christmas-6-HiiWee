@@ -2,6 +2,7 @@ package christmas.domain.restaurant.date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class DateTypeTest {
     @Test
     void findDateTypes() {
         // given
-        int date = 25;
+        LocalDate date = LocalDate.of(2023, 12, 25);
 
         // when
         List<DateType> dateTypes = DateType.findDatTypes(date);
