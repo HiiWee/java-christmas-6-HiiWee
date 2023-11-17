@@ -24,15 +24,15 @@ public record EventContainer(List<Event> events) {
                 ));
     }
 
-    private boolean canJoinAnyEvent(final Reservation reservation) {
-        int totalPrice = reservation.getTotalPrice();
-        return EventCondition.canJoinEventPrice(totalPrice);
-    }
-
     public void joinEvents(final Reservation reservation, final EventJoinHistory history) {
         if (canJoinAnyEvent(reservation)) {
             events.forEach(event -> event.participateEvent(history, reservation));
         }
+    }
+
+    private boolean canJoinAnyEvent(final Reservation reservation) {
+        int totalPrice = reservation.getTotalPrice();
+        return EventCondition.canJoinEventPrice(totalPrice);
     }
 
     @Override
