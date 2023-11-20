@@ -16,7 +16,7 @@ public class WeekendDiscountEvent implements Event {
 
     @Override
     public void participateEvent(final EventJoinHistory history, final Reservation reservation) {
-        if (reservation.containsEventType(EventType.WEEKEND_EVENT)) {
+        if (canJoinEvent(reservation)) {
             int mainMenuCount = reservation.countSameMenuType(MenuType.MAIN);
             history.addParticipatedEvent(EventType.WEEKEND_EVENT, DISCOUNT_INCREMENT * mainMenuCount);
         }
