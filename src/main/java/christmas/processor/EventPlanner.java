@@ -20,7 +20,7 @@ public class EventPlanner {
     public void inputReservationInfo() {
         ExceptionResolver.resolveProcessAfterInput(eventViewer::inputVisitDate, restaurantManager::addSelectedDate);
         ExceptionResolver.resolveProcessAfterInput(eventViewer::inputMenus, restaurantManager::addSelectedMenus);
-        restaurantManager.updateReservation();
+        restaurantManager.makeReservation();
     }
 
     public void applyEventBenefit() {

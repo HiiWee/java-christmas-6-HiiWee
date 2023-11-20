@@ -31,7 +31,7 @@ public class WootecoRestaurantManager {
         return ReservedResults.createFrom(reservation);
     }
 
-    public void updateReservation() {
+    public void makeReservation() {
         Optional<Reservation> optionalReservation = bookingRepository.findReservation();
         if (optionalReservation.isEmpty()) {
             Reservation reservation = new Reservation(findSelectedMenusObject(), findSelectedDateObject());

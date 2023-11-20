@@ -65,7 +65,7 @@ class WootecoRestaurantManagerTest {
         String expectedTotalPriceMessage = "125,000원";
         manager.addSelectedDate(10);
         manager.addSelectedMenus(List.of("해산물파스타-2", "타파스-10"));
-        manager.updateReservation();
+        manager.makeReservation();
 
         // when
         ReservedResults reservedResults = manager.createReservationResults();
@@ -95,7 +95,7 @@ class WootecoRestaurantManagerTest {
 
         // when
         Optional<Reservation> beforeUpdate = repository.findReservation();
-        manager.updateReservation();
+        manager.makeReservation();
         Optional<Reservation> afterUpdate = repository.findReservation();
 
         // then
